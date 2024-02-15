@@ -15,8 +15,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    $grades= \App\Models\Grade::all();
-    dd($grades);
+    $fonctions= \App\Models\Fonction::all();
+    dd($fonctions);
     return view('welcome');
 });
 
