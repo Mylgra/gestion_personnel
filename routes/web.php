@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+use App\Models\Agent;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,11 @@ Route::get('/', function () {
     $typeMouvement= \App\Models\TypeMouvement::all();
     dd($typeMouvement);
     return view('welcome');
+});
+
+Route::get('/agents', function () {
+    $agents = Agent::all();
+    return view('Agents.index',['agents'=>$agents]);
 });
 
 Route::get('/dashboard', function () {
