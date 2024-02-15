@@ -15,8 +15,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    $agents= \App\Models\Agent::all();
-    dd($agents);
+    $grades= \App\Models\Grade::all();
+    dd($grades);
     return view('welcome');
 });
 
