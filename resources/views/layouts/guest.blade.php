@@ -4,26 +4,40 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
+        <meta charset="utf-8">
+        <meta name="author" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="A powerful and conceptual apps base dashboard template that especially build for developers and programmers.">
 
+        <link rel="shortcut icon" href="">
         <title>{{ config('app.name', 'Laravel') }}</title>
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
-        <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-    <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
-            <div>
-                <a href="/">
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-                </a>
-            </div>
 
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
-                {{ $slot }}
+        <script src="./assets/js/bundle.js?ver=3.1.2"></script>
+        <script src="./assets/js/scripts.js?ver=3.1.2"></script>
+    </head>
+    <body class="nk-body bg-lighter npc-default has-sidebar ">
+        <div class="nk-app-root">
+            <div class="nk-main ">
+                <!-- sidebar @s -->
+                <x-siderbar />
+                <!-- sidebar @e -->
+                <!-- wrap @s -->
+                <div class="nk-wrap ">
+                    <!-- main header @s -->
+                    <x-header />
+                    <!-- main header @e -->
+                    <!-- content @s -->
+                    <div class="nk-content ">
+                        {{ $slot }}
+                    </div>
+                    <!-- content @e -->
+                    <!-- footer @s -->
+                    <x-footer />
+                    <!-- footer @e -->
+                </div>
+                <!-- wrap @e -->
             </div>
         </div>
     </body>
