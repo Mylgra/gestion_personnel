@@ -15,8 +15,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    $fonctions= \App\Models\Fonction::all();
-    dd($fonctions);
+    $typeMouvement= \App\Models\TypeMouvement::all();
+    dd($typeMouvement);
     return view('welcome');
 });
 

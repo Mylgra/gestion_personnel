@@ -22,5 +22,6 @@ class DatabaseSeeder extends Seeder
         \App\Models\Agent::factory(15)->create();
         \App\Models\Grade::factory(5)->create();
         \App\Models\Fonction::factory(5)->create();
+        \App\Models\TypeMouvement::factory(5)->create();
     }
 }
