@@ -17,8 +17,7 @@ class FonctionFactory extends Factory
     public function definition(): array
     {
         return [
-            'title'=> fake()->title,
-            'subtitle'=> fake()->word
+            'title'=> fake()->title
         ];
     }
 }

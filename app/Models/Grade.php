@@ -9,8 +9,9 @@ class Grade extends Model
 {
     use HasFactory;
     protected $fillable = ['category',
-                           'code',
+                           'level',
                            'acronym',
+                           'echelon',
                            'designation'
                         ];
 }

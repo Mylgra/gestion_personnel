@@ -18,6 +18,8 @@ class Agent extends Model
         'birthplace',
         'contact',
         'address',
+        'identity',
+        'civil_status',
         'picture'
     ];
 }

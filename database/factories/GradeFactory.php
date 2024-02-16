@@ -18,9 +18,10 @@ class GradeFactory extends Factory
     {
         return [
             'category'=> fake()->word,
-            'code'=> fake()->postcode,
-            'acronym'=> fake()->stateAbbr,
+            'level'=> fake()->countryCode,
             'designation'=> fake()->text,
+            'echelon'=> fake()->text,
+            'acronym'=> fake()->stateAbbr,
         ];
     }
 }

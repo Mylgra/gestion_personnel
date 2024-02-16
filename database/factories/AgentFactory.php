@@ -23,9 +23,11 @@ class AgentFactory extends Factory
             'firstname'=> fake()->firstName,
             'birthday'=> fake()->date,
             'birthplace'=> fake()->address,
+            'civil_status'=> Arr::random( ['Celibataire', 'Marié(e)','Non reconnu']),
             'contact'=> fake()->phoneNumber,
             'address'=> fake()->address,
             'picture'=> fake()->name,
+            'identity'=> fake()->creditCardNumber,
             'gender'=> Arr::random(['Masculin','Feminin'])
         ];
     }

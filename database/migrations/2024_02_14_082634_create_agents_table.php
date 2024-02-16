@@ -16,12 +16,14 @@ return new class extends Migration
             $table->string('name');
             $table->string('username');
             $table->string('firstname');
-            $table->enum('gender', ['Masculin', 'Feminin']);
-            $table->date('birthday');
-            $table->string('birthplace');
-            $table->string('contact')->unique();
-            $table->string('address');
-            $table->string('picture');
+            $table->enum('gender', ['Masculin', 'Feminin','Non reconnu'])->nullable()->default('Non reconnu');
+            $table->date('birthday')->nullable();
+            $table->string('birthplace')->nullable();
+            $table->enum('civil_status', ['Celibataire', 'Marié(e)','Non reconnu'])->default('Non reconnu');;
+            $table->string('contact')->unique()->nullable();;
+            $table->string('address')->nullable();
+            $table->string('picture')->nullable();
+            $table->string('identity')->nullable();
             $table->timestamps();
         });
     }
