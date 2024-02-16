@@ -2,6 +2,7 @@
 
 use App\Models\Agent;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AgentController;
 use App\Http\Controllers\ProfileController;
 
 /*
@@ -21,10 +22,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/agents', function () {
-    $agents = Agent::all();
-    return view('Agents.index',['agents'=>$agents]);
-});
+Route::get('/agents',[AgentController::class,'index'])->name('agent.index');
+
+Route::get('/agents/create',[AgentController::class,'create'])->name('agent.create');
+Route::post('/agents/create',[AgentController::class,'store'])->name('agent.store');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
