@@ -2,6 +2,8 @@
 
 namespace App\View\Components;
 
+use App\View\LinkItems;
+use App\View\Sidebar;
 use Illuminate\View\Component;
 use Illuminate\View\View;
 
@@ -12,6 +14,26 @@ class AppLayout extends Component
      */
     public function render(): View
     {
-        return view('layouts.app');
+        $sidebar = Sidebar::make('Dashboard')
+            ->logo('images/profile.jpg')
+            ->theme('light')
+            ->route('home')
+            ->icons('menu')
+            ->items([
+                LinkItems::make('Dashboard')
+                    ->route('home')
+                    ->icon('grid'),
+                LinkItems::make('Manage Account')
+                    ->route('dashboard')
+                    ->icon('user')
+                    ->children([
+                        LinkItems::make('Profile')
+                            ->route('dashboard'),
+                    ]),
+                LinkItems::make('Settings')
+                    ->route('dashboard')
+                    ->icon('setting')
+            ]);
+        return view('layouts.guest', compact('sidebar'));
     }
 }

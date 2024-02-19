@@ -1,5 +1,9 @@
 <?php
 
+use App\Livewire\Domains\Agents\CreateAgent;
+use App\Livewire\Domains\Agents\ListsAgents;
+use App\Livewire\Domains\Agents\ShowAgent;
+use App\Livewire\Home;
 use App\Models\Agent;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
@@ -15,16 +19,11 @@ use App\Http\Controllers\ProfileController;
 |
 */
 
-Route::get('/', function () {
-    $typeMouvement= \App\Models\TypeMouvement::all();
-    dd($typeMouvement);
-    return view('welcome');
-});
+Route::get('/', Home::class)->name('home');
 
-Route::get('/agents', function () {
-    $agents = Agent::all();
-    return view('Agents.index',['agents'=>$agents]);
-});
+Route::get('/agents', ListsAgents::class)->name('agents');
+Route::get('agents/create', CreateAgent::class)->name('create-agent');
+Route::get('agents/{agent}', ShowAgent::class)->name('show-agent');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

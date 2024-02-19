@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('type_mouvements', function (Blueprint $table) {
             $table->id();
-            $table->enum('type', ['input', 'output','other']);
+            $table->enum('type', ['input', 'output','other'])->default('other');
             $table->string('designation');
             $table->timestamps();
         });

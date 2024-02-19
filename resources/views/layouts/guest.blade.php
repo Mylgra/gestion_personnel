@@ -14,14 +14,14 @@
 
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-        <script src="./assets/js/bundle.js?ver=3.1.2"></script>
-        <script src="./assets/js/scripts.js?ver=3.1.2"></script>
+        <script src="{{ asset('assets/js/bundle.js') }}"></script>
+        <script src="{{ asset('assets/js/scripts.js') }}"></script>
     </head>
     <body class="nk-body bg-lighter npc-default has-sidebar ">
         <div class="nk-app-root">
             <div class="nk-main ">
                 <!-- sidebar @s -->
-                <x-siderbar />
+                {{ $sidebar }}
                 <!-- sidebar @e -->
                 <!-- wrap @s -->
                 <div class="nk-wrap ">

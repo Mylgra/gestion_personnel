@@ -18,7 +18,7 @@ class ServiceFactory extends Factory
     {
         return [
             'name'=> fake()->name,
-            'type'=> Arr::random(['Politique','Administratif'])
+            'type'=> Arr::random(['political', 'administrative'])
         ];
     }
 }
