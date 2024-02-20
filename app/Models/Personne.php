@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -8,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 class Personne extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'name',
         'firstname',
@@ -20,5 +23,9 @@ class Personne extends Model
         'identity',
         'civil_status',
         'picture'
+    ];
+
+    protected $casts = [
+        'birthday' => 'datetime'
     ];
 }

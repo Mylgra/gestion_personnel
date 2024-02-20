@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Factories;
 
 use App\Models\Agent;
@@ -19,10 +21,10 @@ class TransfertFactory extends Factory
     public function definition(): array
     {
         return [
-            'date'=> fake()->date,
-            'document'=> fake()->name,
-            'agent_id'=>Agent::factory()->create(),
-            'service_id'=>Service::factory()->create(),
+            'date' => fake()->date,
+            'document' => fake()->name,
+            'agent_id' => Agent::factory()->create(),
+            'service_id' => Service::factory()->create(),
             //'service_id'=>Service::factory()->create()
         ];
     }

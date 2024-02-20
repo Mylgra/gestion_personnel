@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Factories;
 
 use App\Models\Agent;
@@ -19,12 +21,12 @@ class MobiliteAgentFactory extends Factory
     public function definition(): array
     {
         return [
-            'date'=> fake()->date,
-            'motif'=> Arr::random(['Mise en disponibilité', 'Mise à la diposition','Detachement']),
-            'document'=> fake()->name,
-            'dateDebut'=> fake()->date,
-            'dateRetour'=> fake()->date,
-            'agent_id'=>Agent::factory()->create()
+            'date' => fake()->date,
+            'motif' => Arr::random(['Mise en disponibilité', 'Mise à la diposition','Detachement']),
+            'document' => fake()->name,
+            'dateDebut' => fake()->date,
+            'dateRetour' => fake()->date,
+            'agent_id' => Agent::factory()->create()
         ];
     }
 }

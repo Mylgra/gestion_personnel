@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Factories;
 
 use App\Models\Agent;
@@ -20,11 +22,11 @@ class AttributionGradeFactory extends Factory
     public function definition(): array
     {
         return [
-            'date'=> fake()->date,
-            'motif'=> Arr::random(['Grade initial', 'Evolution en grade']),
-            'document'=> fake()->name,
-            'agent_id'=>Agent::factory()->create(),
-            'grade_id'=>Grade::factory()->create()
+            'date' => fake()->date,
+            'motif' => Arr::random(['Grade initial', 'Evolution en grade']),
+            'document' => fake()->name,
+            'agent_id' => Agent::factory()->create(),
+            'grade_id' => Grade::factory()->create()
         ];
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Factories;
 
 use App\Models\Agent;
@@ -19,10 +21,10 @@ class CessationCarriereFactory extends Factory
     public function definition(): array
     {
         return [
-            'date'=> fake()->date,
-            'motif'=> Arr::random(['Deces', 'Revocation','Mise à la retraite','Démission','Autre']),
-            'document'=> fake()->name,
-            'agent_id'=>Agent::factory()->create()
+            'date' => fake()->date,
+            'motif' => Arr::random(['Deces', 'Revocation','Mise à la retraite','Démission','Autre']),
+            'document' => fake()->name,
+            'agent_id' => Agent::factory()->create()
         ];
     }
 }

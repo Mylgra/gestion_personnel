@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Factories;
 
 use App\Models\Agent;
@@ -20,12 +22,12 @@ class AffectationFactory extends Factory
     public function definition(): array
     {
         return [
-            'date'=> fake()->date,
-            'personalFonction'=> fake()->text,
-            'document'=> fake()->name,
-            'agent_id'=>Agent::factory()->create(),
-            'service_id'=>Service::factory()->create(),
-            'fonction_id'=>Fonction::factory()->create()
+            'date' => fake()->date,
+            'personalFonction' => fake()->text,
+            'document' => fake()->name,
+            'agent_id' => Agent::factory()->create(),
+            'service_id' => Service::factory()->create(),
+            'fonction_id' => Fonction::factory()->create()
         ];
     }
 }

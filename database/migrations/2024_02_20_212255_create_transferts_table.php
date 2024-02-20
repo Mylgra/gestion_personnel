@@ -1,19 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Models\Agent;
 use App\Models\Service;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-return new class extends Migration
-{
+return new class () extends Migration {
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('transferts', function (Blueprint $table) {
+        Schema::create('transferts', function (Blueprint $table): void {
             $table->id();
             $table->date('date');
             $table->string('document')->nullable();

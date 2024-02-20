@@ -1,6 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Factories;
+
 use App\Models\Personne;
 
 use Illuminate\Support\Arr;
@@ -19,12 +22,12 @@ class AgentFactory extends Factory
     public function definition(): array
     {
         return [
-            'date'=> fake()->date,
-            'type'=> Arr::random( ['Politique', 'Administratif','Autres']),
-            'status'=> Arr::random( ['NU', 'Politique','Stagiaire','Autres','non reconnu']),
-            'state'=> Arr::random( ['Actif', 'Inactif','Passif']),
-            'document'=> fake()->creditCardNumber,
-            'personne_id'=>Personne::factory()->create()
+            'date' => fake()->date,
+            'type' => Arr::random(['Politique', 'Administratif','Autres']),
+            'status' => Arr::random(['NU', 'Politique','Stagiaire','Autres','non reconnu']),
+            'state' => Arr::random(['Actif', 'Inactif','Passif']),
+            'document' => fake()->creditCardNumber,
+            'personne_id' => Personne::factory()->create()
         ];
     }
 }

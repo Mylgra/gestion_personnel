@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Factories;
 
 use Illuminate\Support\Arr;
@@ -18,8 +20,8 @@ class TypeMouvementFactory extends Factory
     public function definition(): array
     {
         return [
-            'designation'=> fake()->text,
-            'type'=> Arr::random(['input','output','other'])
+            'designation' => fake()->text,
+            'type' => Arr::random(['input','output','other'])
         ];
     }
 }

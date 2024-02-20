@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Factories;
 
 use Illuminate\Support\Arr;
@@ -18,17 +20,17 @@ class PersonneFactory extends Factory
     public function definition(): array
     {
         return [
-            'name'=> fake()->name,
-            'firstname'=> fake()->firstName,
-            'lastname'=> fake()->lastName,
-            'birthday'=> fake()->date,
-            'birthplace'=> fake()->address,
-            'civil_status'=> Arr::random( ['Celibataire', 'Marié(e)','Non reconnu']),
-            'contact'=> fake()->phoneNumber,
-            'address'=> fake()->address,
-            'picture'=> fake()->name,
-            'identity'=> fake()->creditCardNumber,
-            'gender'=> Arr::random(['Masculin','Feminin','Non reconnu'])
+            'name' => fake()->name,
+            'firstname' => fake()->firstName,
+            'lastname' => fake()->lastName,
+            'birthday' => fake()->date,
+            'birthplace' => fake()->address,
+            'civil_status' => Arr::random(['Celibataire', 'Marié(e)','Non reconnu']),
+            'contact' => fake()->phoneNumber,
+            'address' => fake()->address,
+            'picture' => fake()->name,
+            'identity' => fake()->creditCardNumber,
+            'gender' => Arr::random(['Masculin','Feminin','Non reconnu'])
         ];
     }
 }
