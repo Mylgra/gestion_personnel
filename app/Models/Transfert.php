@@ -5,9 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Service extends Model
+class Transfert extends Model
 {
     use HasFactory;
-
-    protected $fillable = ['name','sigle','level','type','services_id'];
+    protected $fillable = ['date',
+    'document',
+    'agent_id',
+    'service_id'
+    //'service_id'
+ ];
 }

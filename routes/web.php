@@ -4,6 +4,7 @@ use App\Models\Agent;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ServiceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,15 +18,18 @@ use App\Http\Controllers\ProfileController;
 */
 
 Route::get('/', function () {
-    $typeMouvement= \App\Models\TypeMouvement::all();
-    dd($typeMouvement);
+    $cessationCarriere= \App\Models\CessationCarriere::all();
+    dd($cessationCarriere);
     return view('welcome');
 });
 
+// Creation de la route du controller Agent
 Route::get('/agents',[AgentController::class,'index'])->name('agent.index');
-
 Route::get('/agents/create',[AgentController::class,'create'])->name('agent.create');
 Route::post('/agents/create',[AgentController::class,'store'])->name('agent.store');
+
+// Creation de la route du controller Service
+Route::get('/services',[ServiceController::class,'index'])->name('service.index');
 
 
 Route::get('/dashboard', function () {

@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use App\Models\Personne;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
@@ -13,17 +14,12 @@ return new class extends Migration
     {
         Schema::create('agents', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('username');
-            $table->string('firstname');
-            $table->enum('gender', ['Masculin', 'Feminin','Non reconnu'])->nullable()->default('Non reconnu');
-            $table->date('birthday')->nullable();
-            $table->string('birthplace')->nullable();
-            $table->enum('civil_status', ['Celibataire', 'Marié(e)','Non reconnu'])->default('Non reconnu');;
-            $table->string('contact')->unique()->nullable();;
-            $table->string('address')->nullable();
-            $table->string('picture')->nullable();
-            $table->string('identity')->nullable();
+            $table->date('date')->nullable();
+            $table->enum('type', ['Politique', 'Administratif','Autres'])->nullable();
+            $table->enum('status', ['NU', 'Politique','Stagiaire','Autres','non reconnu'])->nullable();
+            $table->enum('state', ['Actif', 'Inactif','Passif'])->nullable();
+            $table->string('document')->nullable();
+            $table->foreignIdFor(Personne::class)->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

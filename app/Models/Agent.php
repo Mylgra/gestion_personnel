@@ -10,16 +10,10 @@ class Agent extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'username',
-        'firstname',
-        'gender',
-        'birthday',
-        'birthplace',
-        'contact',
-        'address',
-        'identity',
-        'civil_status',
-        'picture'
+        'date',
+        'type',
+        'statut',
+        'document',
+        'personne_id'
     ];
 }

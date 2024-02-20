@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('grades', function (Blueprint $table) {
             $table->id();
-            $table->string('category')->unique();
-            $table->string('level')->unique();
+            $table->string('category');
+            $table->string('level');
             $table->string('designation');
             $table->string('echelon');
             $table->string('acronym');

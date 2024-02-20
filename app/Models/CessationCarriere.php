@@ -5,9 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Service extends Model
+class CessationCarriere extends Model
 {
     use HasFactory;
-
-    protected $fillable = ['name','sigle','level','type','services_id'];
+    protected $fillable = ['date',
+    'document',
+    'motif',
+    'agent_id'
+ ];
 }
