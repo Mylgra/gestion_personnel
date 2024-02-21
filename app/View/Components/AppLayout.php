@@ -18,7 +18,7 @@ class AppLayout extends Component
             ->logo('images/profile.jpg')
             ->theme('light')
             ->route('home')
-            ->icons('menu')
+            ->icon('menu')
             ->items([
                 LinkItems::make('Dashboard')
                     ->route('home')

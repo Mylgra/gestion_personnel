@@ -2,20 +2,22 @@
 
 namespace App\View;
 
+use Closure;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Route;
+use InvalidArgumentException;
 use Livewire\Component;
 use ReflectionClass;
 use ReflectionMethod;
 
 class Sidebar extends Component implements Htmlable
 {
-    protected string | \Closure | null $logo = null;
+    protected string|Closure|null $logo = null;
 
-    protected string | \Closure | null $theme;
+    protected string|Closure|null $theme;
 
-    protected string | \Closure | null $icon;
+    protected string|Closure|null $icon;
 
     protected string $route;
 
@@ -32,65 +34,15 @@ class Sidebar extends Component implements Htmlable
         return new static($name);
     }
 
-    public function render(): View
-    {
-        return view('components.sidebar.sidebar', $this->extractPublicMethods());
-    }
-
     public function toHtml(): string
     {
         return $this->render()->render();
     }
 
-    public function logo(string $logo): static
+    public function render(): View
     {
-        $this->logo = $logo;
-
-        return $this;
+        return view('components.sidebar.sidebar', $this->extractPublicMethods());
     }
-
-    public function getLogo(): \Closure|string|null
-    {
-        if ($this->logo && file_exists(public_path($this->logo))) {
-            return $this->logo;
-        }
-        return asset('images/profile.jpg');
-    }
-
-    public function route(string $route): static
-    {
-        if (!Route::has($route)) {
-            throw new \InvalidArgumentException('The provided route does not exist.');
-        }
-        $this->route = $route;
-
-        return $this;
-    }
-
-    public function getRoute(): string
-    {
-        return route($this->route);
-    }
-
-    public function items(array $items): static
-    {
-        $this->items = array_map(function ($item) {
-            if ($item instanceof LinkItems) {
-                return $item;
-            }
-            throw new \InvalidArgumentException('Invalid must be instance of Link.');
-        }, $items);
-
-        return $this;
-    }
-
-    public function getItems(): array
-    {
-        return array_map(function ($item) {
-            return $item;
-        }, $this->items);
-    }
-
 
     /**
      * @return array<string, Closure>
@@ -110,6 +62,55 @@ class Sidebar extends Component implements Htmlable
         return $publicMethods;
     }
 
+    public function logo(string $logo): static
+    {
+        $this->logo = $logo;
+
+        return $this;
+    }
+
+    public function getLogo(): Closure|string|null
+    {
+        if ($this->logo && file_exists(public_path($this->logo))) {
+            return $this->logo;
+        }
+        return asset('images/profile.jpg');
+    }
+
+    public function route(string $route): static
+    {
+        if (!Route::has($route)) {
+            throw new InvalidArgumentException('The provided route does not exist.');
+        }
+        $this->route = $route;
+
+        return $this;
+    }
+
+    public function getRoute(): string
+    {
+        return route($this->route);
+    }
+
+    public function items(array $items): static
+    {
+        $this->items = array_map(function ($item) {
+            if ($item instanceof LinkItems) {
+                return $item;
+            }
+            throw new InvalidArgumentException('Invalid must be instance of Link.');
+        }, $items);
+
+        return $this;
+    }
+
+    public function getItems(): array
+    {
+        return array_map(function ($item) {
+            return $item;
+        }, $this->items);
+    }
+
     public function theme(string $theme): static
     {
         $this->theme = $theme;
@@ -117,19 +118,19 @@ class Sidebar extends Component implements Htmlable
         return $this;
     }
 
-    public function getTheme(): \Closure|string|null
+    public function getTheme(): Closure|string|null
     {
         return $this->theme;
     }
 
-    public function icons(string $icon): static
+    public function icon(string $icon): static
     {
         $this->icon = $icon;
 
         return $this;
     }
 
-    public function getIcon(): \Closure|string|null
+    public function getIcon(): Closure|string|null
     {
         return $this->icon;
     }
