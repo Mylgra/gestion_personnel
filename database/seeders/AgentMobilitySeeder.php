@@ -1,19 +1,19 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Database\Seeders;
 
-use App\Models\Fonction;
+use App\Models\AgentMobility;
 use Illuminate\Database\Seeder;
 
-class FonctionSeeder extends Seeder
+class AgentMobilitySeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Fonction::factory()->create();
+        AgentMobility::factory()
+            ->count(10)
+            ->create();
     }
 }

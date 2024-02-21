@@ -1,19 +1,17 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Database\Seeders;
 
-use App\Models\Fonction;
+use App\Models\CareerBreak;
 use Illuminate\Database\Seeder;
 
-class FonctionSeeder extends Seeder
+class CareerBreakSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Fonction::factory()->create();
+        CareerBreak::factory()->count(10)->create();
     }
 }
