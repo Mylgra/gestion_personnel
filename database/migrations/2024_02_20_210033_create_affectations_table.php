@@ -3,11 +3,11 @@
 declare(strict_types=1);
 
 use App\Models\Agent;
-use App\Models\Service;
 use App\Models\Fonction;
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
+use App\Models\Service;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 return new class () extends Migration {
     /**
@@ -18,7 +18,7 @@ return new class () extends Migration {
         Schema::create('affectations', function (Blueprint $table): void {
             $table->id();
             $table->date('date');
-            $table->string('personalFonction')->nullable();
+            $table->string('personal')->nullable();
             $table->string('document')->nullable();
             $table->foreignIdFor(Agent::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Service::class)->constrained()->cascadeOnDelete();

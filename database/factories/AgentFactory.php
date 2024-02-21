@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Database\Factories;
 
-use App\Models\Personne;
-
-use Illuminate\Support\Arr;
+use App\Models\Agent;
+use App\Models\Person;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Arr;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Agent>
+ * @extends Factory<Agent>
  */
 class AgentFactory extends Factory
 {
@@ -23,11 +23,11 @@ class AgentFactory extends Factory
     {
         return [
             'date' => fake()->date,
-            'type' => Arr::random(['Politique', 'Administratif','Autres']),
-            'status' => Arr::random(['NU', 'Politique','Stagiaire','Autres','non reconnu']),
-            'state' => Arr::random(['Actif', 'Inactif','Passif']),
+            'type' => Arr::random(['Politique', 'Administratif', 'Autres']),
+            'status' => Arr::random(['NU', 'Politique', 'Stagiaire', 'Autres', 'non reconnu']),
+            'state' => Arr::random(['Actif', 'Inactif', 'Passif']),
             'document' => fake()->creditCardNumber,
-            'personne_id' => Personne::factory()->create()
+            'person_id' => Person::factory()->create()
         ];
     }
 }

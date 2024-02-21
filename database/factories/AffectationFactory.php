@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace Database\Factories;
 
+use App\Models\Affectation;
 use App\Models\Agent;
-use App\Models\Service;
 use App\Models\Fonction;
+use App\Models\Service;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Affectation>
+ * @extends Factory<Affectation>
  */
 class AffectationFactory extends Factory
 {
@@ -23,7 +24,7 @@ class AffectationFactory extends Factory
     {
         return [
             'date' => fake()->date,
-            'personalFonction' => fake()->text,
+            'personal' => fake()->text,
             'document' => fake()->name,
             'agent_id' => Agent::factory()->create(),
             'service_id' => Service::factory()->create(),

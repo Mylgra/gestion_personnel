@@ -15,7 +15,7 @@ class Service extends Model
 
     protected $fillable = [
         'name',
-        'sigle',
+        'acronym', // sigle
         'level',
         'type',
         'services_id'
@@ -38,6 +38,6 @@ class Service extends Model
 
     public function transfers(): HasMany
     {
-        return $this->hasMany(Transfert::class);
+        return $this->hasMany(Transfer::class);
     }
 }

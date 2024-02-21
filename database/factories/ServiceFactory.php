@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace Database\Factories;
 
+use App\Models\Service;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Arr;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Service>
+ * @extends Factory<Service>
  */
 class ServiceFactory extends Factory
 {
@@ -21,9 +22,9 @@ class ServiceFactory extends Factory
     {
         return [
             'name' => fake()->name,
-            'sigle' => fake()->stateAbbr,
-            'level' => Arr::random(['Direction', 'Division','Bureau','Cellule','Cabinet','Autre']),
-            'type' => Arr::random(['Politique','Administratif','Appui','Autre'])
+            'acronym' => fake()->macAddress,
+            'level' => Arr::random(['Direction', 'Division', 'Bureau', 'Cellule', 'Cabinet', 'Autre']),
+            'type' => Arr::random(['Politique', 'Administratif', 'Appui', 'Autre'])
         ];
     }
 }

@@ -14,7 +14,7 @@ class Affectation extends Model
 
     protected $fillable = [
         'date',
-        'personalFonction',
+        'personal',
         'document',
         'agent_id',
         'service_id',
