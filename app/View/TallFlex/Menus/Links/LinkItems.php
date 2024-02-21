@@ -1,7 +1,8 @@
 <?php
 
-namespace App\View;
+namespace App\View\TallFlex\Menus\Links;
 
+use Closure;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Support\Facades\Route;
 use Illuminate\View\View;
@@ -12,10 +13,10 @@ use Throwable;
 
 class LinkItems implements Htmlable
 {
-    public string | \Closure | null $icon = null;
-    public string | null $active = null;
+    public string|Closure|null $icon = null;
+    public string|null $active = null;
     public array $children = [];
-    public string  $route;
+    public string $route;
 
     public function __construct(
         public ?string $name = null
@@ -28,21 +29,11 @@ class LinkItems implements Htmlable
         return new static($name);
     }
 
-    public function render(): View
-    {
-        return view('components.sidebar.link-items', $this->extractPublicMethods());
-    }
-
     public function setName(string $name): static
     {
         $this->name = $name;
 
         return $this;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
     }
 
     public function route(string $route): static
@@ -60,21 +51,6 @@ class LinkItems implements Htmlable
         return route($this->route);
     }
 
-    private function extractPublicMethods(): array
-    {
-        $methods = new ReflectionClass($this);
-        $publicMethods = [];
-
-        foreach ($methods->getMethods(ReflectionMethod::IS_PUBLIC) as $method) {
-            $methodName = $method->getName();
-            if (method_exists($this, $methodName)) {
-                $publicMethods[$methodName] = $this->$methodName(...);
-            }
-        }
-
-        return $publicMethods;
-    }
-
     public function icon(string $icon): static
     {
         $this->icon = $icon;
@@ -82,7 +58,7 @@ class LinkItems implements Htmlable
         return $this;
     }
 
-    public function getIcon(): \Closure|string|null
+    public function getIcon(): Closure|string|null
     {
         return $this->icon;
     }
@@ -112,5 +88,30 @@ class LinkItems implements Htmlable
     public function toHtml(): string
     {
         return $this->render()->render();
+    }
+
+    public function render(): View
+    {
+        return view('components.sidebar.link-items', $this->extractPublicMethods());
+    }
+
+    private function extractPublicMethods(): array
+    {
+        $methods = new ReflectionClass($this);
+        $publicMethods = [];
+
+        foreach ($methods->getMethods(ReflectionMethod::IS_PUBLIC) as $method) {
+            $methodName = $method->getName();
+            if (method_exists($this, $methodName)) {
+                $publicMethods[$methodName] = $this->$methodName(...);
+            }
+        }
+
+        return $publicMethods;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
     }
 }

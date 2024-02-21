@@ -7,7 +7,9 @@
 <li class="nk-menu-item {{ $children ? 'has-sub' : '' }}">
     <a
         href="{{ $route }}"
-        wire:navigate
+        @if(! $children)
+            wire:navigate
+        @endif
         class="nk-menu-link {{ request()->routeIs($route) ? 'active current-page' : '' }} {{ $children ? ' nk-menu-toggle' : '' }}">
         <span class="nk-menu-icon">
             <em class="icon ni ni-{{ $icon }}"></em>

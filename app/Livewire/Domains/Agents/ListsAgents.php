@@ -3,7 +3,7 @@
 namespace App\Livewire\Domains\Agents;
 
 use App\Models\Agent;
-use App\View\Datatable;
+use App\View\TallFlex\Tables\Datatable;
 use Illuminate\View\View;
 use Livewire\Attributes\Layout;
 use Livewire\Component;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Exceptions;
+namespace App\View\TallFlex\Exceptions;
 
 use Exception;
 

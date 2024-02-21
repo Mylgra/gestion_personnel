@@ -1,18 +1,20 @@
 <?php
 
-namespace App\View;
+namespace App\View\TallFlex\Menus;
 
+use App\View\TallFlex\Forms\HasExstractPublicMethods;
+use App\View\TallFlex\Menus\Links\LinkItems;
 use Closure;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Route;
 use InvalidArgumentException;
 use Livewire\Component;
-use ReflectionClass;
-use ReflectionMethod;
 
 class Sidebar extends Component implements Htmlable
 {
+    use HasExstractPublicMethods;
+
     protected string|Closure|null $logo = null;
 
     protected string|Closure|null $theme;
@@ -44,24 +46,6 @@ class Sidebar extends Component implements Htmlable
         return view('components.sidebar.sidebar', $this->extractPublicMethods());
     }
 
-    /**
-     * @return array<string, Closure>
-     */
-    public function extractPublicMethods(): array
-    {
-        $methods = new ReflectionClass($this);
-        $publicMethods = [];
-
-        foreach ($methods->getMethods(ReflectionMethod::IS_PUBLIC) as $method) {
-            $methodName = $method->getName();
-            if (method_exists($this, $methodName)) {
-                $publicMethods[$methodName] = $this->$methodName(...);
-            }
-        }
-
-        return $publicMethods;
-    }
-
     public function logo(string $logo): static
     {
         $this->logo = $logo;
@@ -74,7 +58,7 @@ class Sidebar extends Component implements Htmlable
         if ($this->logo && file_exists(public_path($this->logo))) {
             return $this->logo;
         }
-        return asset('images/profile.jpg');
+        return asset('assets/images/logo.jpg');
     }
 
     public function route(string $route): static

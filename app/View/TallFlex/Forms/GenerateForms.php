@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\View\Forms;
+namespace App\View\TallFlex\Forms;
 
 use Livewire\Component;
 

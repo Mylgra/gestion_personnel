@@ -2,35 +2,33 @@
 
 declare(strict_types=1);
 
-namespace App\View\Forms;
+namespace App\View\TallFlex\Forms;
 
+use Closure;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\View\View;
 use Livewire\Component;
-use Throwable;
-use Closure;
 use Override;
+use Throwable;
 
 class TextInput extends GenerateForms implements Htmlable
 {
+    use HasExstractPublicMethods;
+
     protected Component $component;
 
-    protected string | Closure | null $layout = null;
+    protected string|Closure|null $layout = null;
 
-    protected string | Closure | null $type = null;
+    protected string|Closure|null $type = null;
 
     protected bool $required = true;
 
-    protected int | Closure | null $minimum = null;
+    protected int|Closure|null $minimum = null;
 
     public function __construct(
         protected string $name
-    ) {
-    }
-
-    public function render(): View
+    )
     {
-        return view('components.forms.input');
     }
 
     public static function make(string $name): static
@@ -45,6 +43,11 @@ class TextInput extends GenerateForms implements Htmlable
     public function toHtml(): string
     {
         return $this->render()->render();
+    }
+
+    public function render(): View
+    {
+        return view('components.forms.input');
     }
 
     public function label(string $layout): static
@@ -85,7 +88,7 @@ class TextInput extends GenerateForms implements Htmlable
 
     public function min(int $minimum): static
     {
-        $this->required = $minimum;
+        $this->minimum = $minimum;
 
         return $this;
     }

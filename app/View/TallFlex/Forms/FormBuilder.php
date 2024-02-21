@@ -2,9 +2,8 @@
 
 declare(strict_types=1);
 
-namespace App\View;
+namespace App\View\TallFlex\Forms;
 
-use App\View\Forms\GenerateForms;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Support\Facades\Route;
 use Illuminate\View\View;

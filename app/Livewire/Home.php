@@ -6,7 +6,7 @@ use Illuminate\View\View;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
-#[Layout('components.layouts.app')]
+#[Layout('layouts.guest')]
 class Home extends Component
 {
     public function render(): View

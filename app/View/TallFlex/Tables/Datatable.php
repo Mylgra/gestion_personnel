@@ -1,14 +1,15 @@
 <?php
 
-namespace App\View;
+namespace App\View\TallFlex\Tables;
 
-use App\View\Exceptions\ModelDoesntExist;
+use App\View\TallFlex\Exceptions\ModelDoesntExist;
 use Exception;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\View\View;
 use Livewire\Component;
 use ReflectionClass;
 use ReflectionMethod;
+use Schema;
 use Throwable;
 
 class Datatable extends Component implements Htmlable
@@ -21,7 +22,7 @@ class Datatable extends Component implements Htmlable
 
     protected string $sortDirection = 'asc';
 
-    protected array | null $actions = [];
+    protected array|null $actions = [];
 
     public function __construct(
         public ?string $name = null
@@ -34,17 +35,17 @@ class Datatable extends Component implements Htmlable
         return new static($name);
     }
 
-    public function render(): View
-    {
-        return view('components.datas.datatable', $this->extractPublicMethods());
-    }
-
     /**
      * @throws Throwable
      */
     public function toHtml(): string
     {
         return $this->render()->render();
+    }
+
+    public function render(): View
+    {
+        return view('components.datas.datatable', $this->extractPublicMethods());
     }
 
     private function extractPublicMethods(): array
@@ -70,7 +71,7 @@ class Datatable extends Component implements Htmlable
 
         $modelInstance = new $modelClass;
         $this->model = [
-            'columns' => \Schema::getColumnListing($modelInstance->getTable()),
+            'columns' => Schema::getColumnListing($modelInstance->getTable()),
             'data' => $modelClass::query()
                 ->orderBy($this->sortColumn, $this->sortDirection)
                 ->paginate($perPage)
@@ -92,7 +93,7 @@ class Datatable extends Component implements Htmlable
         if ($this->model !== []) {
             foreach ($fields as $field) {
                 if (!in_array($field, $this->model['columns'])) {
-                    throw new \Exception("The field {$field} does not exist in the model.");
+                    throw new Exception("The field {$field} does not exist in the model.");
                 }
             }
         }

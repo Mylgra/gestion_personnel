@@ -1,18 +1,20 @@
 @php
     $route = $getRoute();
-    $image = asset($getLogo());
+    $image = $getLogo();
     $items = $getItems();
     $theme = $getTheme();
     $icon = $getIcon();
+    $name = $getName();
 @endphp
 
 <div class="nk-sidebar nk-sidebar-fixed is-{{ $theme ?? 'white' }} " data-content="sidebarMenu">
     <div class="nk-sidebar-element nk-sidebar-head">
         <div class="nk-sidebar-brand">
             <a href="{{ $route }}" class="logo-link nk-sidebar-logo" wire:navigate>
-                <img class="logo-light logo-img" src="{{ $image }}" srcset="{{ $image }} 2x" alt="logo">
-                <img class="logo-dark logo-img" src="{{ $image }}" srcset="{{ $image }} 2x" alt="logo-dark">
-                <img class="logo-small logo-img logo-img-small" src="{{ $image }}" srcset="{{ $image }} 2x" alt="logo-small">
+                <img class="logo-light logo-img" src="{{ $image }}" srcset="{{ $image }} 2x" alt="{{ $name }}">
+                <img class="logo-dark logo-img" src="{{ $image }}" srcset="{{ $image }} 2x" alt="{{ $name }}">
+                <img class="logo-small logo-img logo-img-small" src="{{ $image }}" srcset="{{ $image }} 2x"
+                     alt="{{ $name }}">
             </a>
         </div>
         <div class="nk-menu-trigger me-n2">
@@ -28,6 +30,9 @@
         <div class="nk-sidebar-content">
             <div class="nk-sidebar-menu" data-simplebar>
                 <ul class="nk-menu">
+                    <li class="nk-menu-heading">
+                        <h6 class="overline-title text-primary-alt">{{ $name }}</h6>
+                    </li>
                     @foreach($items as $item)
                         {{ $item }}
                     @endforeach

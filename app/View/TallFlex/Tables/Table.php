@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Tables;
+namespace App\View\TallFlex\Tables;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
