@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Grade;
 use Illuminate\Database\Seeder;
 
 class GradeSeeder extends Seeder
@@ -12,6 +14,6 @@ class GradeSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Grade::factory()->create();
     }
 }

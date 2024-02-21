@@ -1,27 +1,28 @@
 <?php
 
+declare(strict_types=1);
+
+use App\Contract\Enums\AgentStateEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class () extends Migration {
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('agents', function (Blueprint $table) {
+        Schema::create('agents', function (Blueprint $table): void {
             $table->id();
-            $table->string('name');
-            $table->string('username');
-            $table->string('firstname');
-            $table->enum('gender', ['Masculin', 'Feminin']);
-            $table->date('birthday');
-            $table->string('birthplace');
-            $table->string('contact')->unique();
-            $table->string('address');
-            $table->string('picture');
+            $table->date('date')->nullable();
+            $table->enum('type', ['Politique', 'Administratif', 'Autres'])
+                ->default('Autres');
+            $table->enum('status', ['NU', 'Politique', 'Stagiaire', 'Autres', 'non reconnu'])
+                ->default('non reconnu');
+            $table->enum('state', ['Actif', 'Inactif', 'Passif'])
+                ->default(AgentStateEnum::PASSIF->value);
+            $table->string('document')->nullable();
             $table->timestamps();
         });
     }

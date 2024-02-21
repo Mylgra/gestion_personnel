@@ -2,16 +2,16 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\TypeMovement;
 use Illuminate\Database\Seeder;
 
-class TypeMouvementSeeder extends Seeder
+class TypeMovementSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        //
+        TypeMovement::factory(4)->create();
     }
 }

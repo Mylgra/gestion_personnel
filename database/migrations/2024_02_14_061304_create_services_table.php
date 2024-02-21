@@ -14,8 +14,10 @@ return new class extends Migration
         Schema::create('services', function (Blueprint $table) {
             $table->id();
             $table->string('name', 150)->unique();
-            $table->enum('type', ['political', 'administrative']);
-            $table->foreignId('services_id')->nullable();
+            $table->string('acronym', 10)->unique();
+            $table->string('level', ['Direction', 'Division', 'Bureau', 'Cellule', 'Cabinet', 'Autre']);
+            $table->enum('type', ['Politique', 'Administratif', 'Appui', 'Autre']);
+            $table->foreignId('services_id')->default(0);
             $table->timestamps();
         });
     }

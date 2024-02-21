@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -17,10 +19,11 @@ class GradeFactory extends Factory
     public function definition(): array
     {
         return [
-            'category'=> fake()->word,
-            'code'=> fake()->postcode,
-            'acronym'=> fake()->stateAbbr,
-            'designation'=> fake()->text,
+            'category' => fake()->word,
+            'level' => fake()->countryCode,
+            'designation' => fake()->text,
+            'echelon' => fake()->text,
+            'acronym' => fake()->stateAbbr,
         ];
     }
 }

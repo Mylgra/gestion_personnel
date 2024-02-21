@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Fonction;
 use Illuminate\Database\Seeder;
 
 class FonctionSeeder extends Seeder
@@ -12,6 +14,6 @@ class FonctionSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Fonction::factory()->create();
     }
 }

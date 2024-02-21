@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -12,16 +14,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
-        \App\Models\Service::factory(5)->create();
-        \App\Models\Agent::factory(15)->create();
-        \App\Models\Grade::factory(5)->create();
-        \App\Models\Fonction::factory(5)->create();
-        \App\Models\TypeMouvement::factory(5)->create();
+        $this->call([
+            PersonSeeder::class,
+            AgentSeeder::class,
+            TypeMovementSeeder::class,
+            CareerBreakSeeder::class,
+            AffectationSeeder::class,
+            AgentMobilitySeeder::class,
+            FonctionSeeder::class,
+            GradeSeeder::class,
+            ServiceSeeder::class,
+            TransferSeeder::class,
+        ]);
     }
 }

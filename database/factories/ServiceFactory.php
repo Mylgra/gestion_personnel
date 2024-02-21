@@ -17,8 +17,10 @@ class ServiceFactory extends Factory
     public function definition(): array
     {
         return [
-            'name'=> fake()->name,
-            'type'=> Arr::random(['political', 'administrative'])
+            'name' => fake()->name,
+            'acronym' => fake()->macAddress,
+            'level' => Arr::random(['Direction', 'Division', 'Bureau', 'Cellule', 'Cabinet', 'Autre']),
+            'type' => Arr::random(['Politique', 'Administratif', 'Appui', 'Autre'])
         ];
     }
 }

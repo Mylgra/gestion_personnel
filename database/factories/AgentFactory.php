@@ -1,12 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Factories;
+
+use App\Models\Agent;
+use App\Models\Person;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Arr;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
-
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Agent>
+ * @extends Factory<Agent>
  */
 class AgentFactory extends Factory
 {
@@ -18,15 +22,12 @@ class AgentFactory extends Factory
     public function definition(): array
     {
         return [
-            'name'=> fake()->name,
-            'username'=> fake()->userName,
-            'firstname'=> fake()->firstName,
-            'birthday'=> fake()->date,
-            'birthplace'=> fake()->address,
-            'contact'=> fake()->phoneNumber,
-            'address'=> fake()->address,
-            'picture'=> fake()->name,
-            'gender'=> Arr::random(['Masculin','Feminin'])
+            'date' => fake()->date,
+            'type' => Arr::random(['Politique', 'Administratif', 'Autres']),
+            'status' => Arr::random(['NU', 'Politique', 'Stagiaire', 'Autres', 'non reconnu']),
+            'state' => Arr::random(['Actif', 'Inactif', 'Passif']),
+            'document' => fake()->creditCardNumber,
+            'person_id' => Person::factory()->create()
         ];
     }
 }
