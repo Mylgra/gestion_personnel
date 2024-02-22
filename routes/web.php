@@ -20,8 +20,8 @@ use App\Http\Controllers\ServiceController;
 */
 
 Route::get('/', function () {
-    $cessationCarriere = App\Models\CessationCarriere::all();
-    dd($cessationCarriere);
+    $agent = Agent::find(1)->affectations()->toSql();
+    dd($agent);
     return view('welcome');
 });
 
