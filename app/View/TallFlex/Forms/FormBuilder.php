@@ -4,19 +4,22 @@ declare(strict_types=1);
 
 namespace App\View\TallFlex\Forms;
 
+use Closure;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Support\Facades\Route;
 use Illuminate\View\View;
 use InvalidArgumentException;
-use ReflectionClass;
-use ReflectionMethod;
 use Throwable;
 
 class FormBuilder extends GenerateForms implements Htmlable
 {
+    use HasExstractPublicMethods;
+
     protected array $schema = [];
 
     protected string|null $route = null;
+
+    protected int|Closure|null $column = 0;
 
     public function __construct(
         protected ?string $name = null
@@ -24,7 +27,7 @@ class FormBuilder extends GenerateForms implements Htmlable
     {
     }
 
-    public static function make(string $name): static
+    public static function make(string $name = null): static
     {
         return new static($name);
     }
@@ -46,11 +49,6 @@ class FormBuilder extends GenerateForms implements Htmlable
         return array_map(fn($item) => $item, $this->schema);
     }
 
-    public function getSections(): array
-    {
-        return $this->schema;
-    }
-
     /**
      * @throws Throwable
      */
@@ -62,29 +60,6 @@ class FormBuilder extends GenerateForms implements Htmlable
     public function render(): View
     {
         return view('components.forms.form-builder', $this->extractPublicMethods());
-    }
-
-    /**
-     * @return array<string, Closure>
-     */
-    public function extractPublicMethods(): array
-    {
-        $methods = new ReflectionClass($this);
-        $publicMethods = [];
-
-        foreach ($methods->getMethods(ReflectionMethod::IS_PUBLIC) as $method) {
-            $methodName = $method->getName();
-            if (method_exists($this, $methodName)) {
-                $publicMethods[$methodName] = $this->$methodName(...);
-            }
-        }
-
-        return $publicMethods;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
     }
 
     public function action(string $route): static
@@ -100,5 +75,27 @@ class FormBuilder extends GenerateForms implements Htmlable
     public function getRoute(): string
     {
         return $this->route ?? "";
+    }
+
+    public function hasColumn(): bool
+    {
+        return isset($this->column);
+    }
+
+    public function hasSection(): bool
+    {
+        return isset($this->schema);
+    }
+
+    public function column(int $column): static
+    {
+        $this->column = $column;
+
+        return $this;
+    }
+
+    public function getColumn(): int|Closure|null
+    {
+        return $this->column;
     }
 }
