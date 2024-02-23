@@ -8,30 +8,38 @@ use Illuminate\View\View;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
-#[Layout('components.layouts.app')]
+#[Layout('layouts.guest')]
 class ListsAgents extends Component
 {
     public $component;
+
+    public string $search = '';
 
     public function render(): View
     {
         return view('livewire.domains.agents.lists-agents');
     }
 
+    public function delete(string $item)
+    {
+        dd($item);
+    }
+
     public function components()
     {
         return Datatable::make('Liste des agents')
             ->fields([
-                'name' => 'Nom',
-                'email' => 'Email',
-                'grade_id' => 'Grade',
+                'type' => 'Type',
+                'status' => 'Status',
+                'state' => 'State',
+                'actions' => "Actions"
             ])
-            ->sort('name')
+            ->search($this->search)
             ->model(Agent::class)
             ->actions([
-                'show' => 'agents.show',
-                'edit' => 'agents.edit',
-                'delete' => 'agents.delete',
+                'show' => 'show-agent',
+                'edit' => 'show-agent',
+                'delete' => 'show-agent',
             ]);
     }
 }

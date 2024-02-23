@@ -11,7 +11,7 @@ abstract class Table extends Component
 {
     use WithPagination;
 
-    public abstract function columns(): array;
+    public abstract function columns(array $columns): array;
 
     public function data(): Collection|array
     {

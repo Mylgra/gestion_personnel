@@ -5,8 +5,11 @@ namespace App\View\TallFlex\Tables;
 use App\View\TallFlex\Exceptions\ModelDoesntExist;
 use Exception;
 use Illuminate\Contracts\Support\Htmlable;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
 use Livewire\Component;
+use Livewire\WithPagination;
 use ReflectionClass;
 use ReflectionMethod;
 use Schema;
@@ -14,6 +17,8 @@ use Throwable;
 
 class Datatable extends Component implements Htmlable
 {
+    use WithPagination;
+
     protected array $model = [];
 
     protected array $fields = [];
@@ -65,7 +70,7 @@ class Datatable extends Component implements Htmlable
 
     public function model(string $modelClass, int $perPage = 10): static
     {
-        if (!is_subclass_of($modelClass, 'Illuminate\Database\Eloquent\Model')) {
+        if (!is_subclass_of($modelClass, Model::class)) {
             throw new ModelDoesntExist("The class {$modelClass} is not a valid Eloquent model.");
         }
 
@@ -85,9 +90,6 @@ class Datatable extends Component implements Htmlable
         return $this->model;
     }
 
-    /**
-     * @throws ModelDoesntExist
-     */
     public function fields(array $fields): static
     {
         if ($this->model !== []) {
@@ -130,5 +132,14 @@ class Datatable extends Component implements Htmlable
     public function getActions(): array
     {
         return $this->actions;
+    }
+
+    public function search(string $search): static
+    {
+        if ($this->model !== []) {
+            $this->model['data'] = $this->model['data']->filter(fn($item) => Str::contains($item, $search));
+        }
+
+        return $this;
     }
 }

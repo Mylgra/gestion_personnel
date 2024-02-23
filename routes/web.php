@@ -1,23 +1,11 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use App\Livewire\Domains\Agents\CreateAgent;
 use App\Livewire\Domains\Agents\ListsAgents;
 use App\Livewire\Domains\Agents\ShowAgent;
 use App\Livewire\Home;
-use App\Models\Agent;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProfileController;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
 Route::get('/', Home::class)->name('home');
 
@@ -35,4 +23,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
