@@ -8,12 +8,14 @@ use Closure;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Traits\Macroable;
 use InvalidArgumentException;
 use Livewire\Component;
 
 class Sidebar extends Component implements Htmlable
 {
     use HasExstractPublicMethods;
+    use Macroable;
 
     protected string|Closure|null $logo = null;
 

@@ -19,12 +19,9 @@ class SideBarLayout
                 LinkItems::make('Dashboard')
                     ->route('home')
                     ->icon('grid'),
-                LinkItems::make('Users')
-                    ->route('home')
-                    ->icon('user'),
                 LinkItems::make('agents')
                     ->route('agents')
-                    ->icon('user'),
+                    ->icon('user-c'),
             ]);
 
         $view->with('sidebar', $sidebar);

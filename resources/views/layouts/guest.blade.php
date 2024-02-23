@@ -19,7 +19,7 @@
     <script src="{{ asset('assets/js/bundle.js') }}"></script>
     <script src="{{ asset('assets/js/scripts.js') }}"></script>
 </head>
-<body class="nk-body bg-lighter npc-default has-sidebar ">
+<body class="nk-body bg-lighter npc-default has-sidebar ui-bordered">
 <div class="nk-app-root">
     <div class="nk-main ">
         {{ $sidebar }}

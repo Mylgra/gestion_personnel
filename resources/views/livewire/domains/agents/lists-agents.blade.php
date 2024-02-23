@@ -4,51 +4,42 @@
             <div class="nk-block-head nk-block-head-sm">
                 <div class="nk-block-between">
                     <div class="nk-block-head-content">
-                        <h3 class="nk-block-title page-title">Instructors</h3>
+                        <h3 class="nk-block-title page-title">Projects</h3>
                     </div>
                     <div class="nk-block-head-content">
                         <div class="toggle-wrap nk-block-tools-toggle">
-                            <a href="#" class="btn btn-icon btn-trigger toggle-expand me-n1" data-target="more-options">
-                                <em class="icon ni ni-more-v"></em>
+                            <a href="#" class="btn btn-icon btn-trigger toggle-expand me-n1" data-target="pageMenu">
+                                <em class="icon ni ni-menu-alt-r"></em>
                             </a>
-                            <div class="toggle-expand-content" data-content="more-options">
+                            <div class="toggle-expand-content" data-content="pageMenu">
                                 <ul class="nk-block-tools g-3">
                                     <li>
-                                        <div class="form-control-wrap">
-                                            <div class="form-icon form-icon-right">
-                                                <em class="icon ni ni-search"></em>
-                                            </div>
-                                            <input
-                                                wire:model.live="search"
-                                                type="text"
-                                                class="form-control"
-                                                id="search"
-                                                name="search"
-                                                placeholder="Search by name">
-                                        </div>
-                                    </li>
-                                    <li>
                                         <div class="drodown">
-                                            <a href="#"
-                                               class="dropdown-toggle dropdown-indicator btn btn-outline-light btn-white"
-                                               data-bs-toggle="dropdown">Status</a>
+                                            <a href="#" class="dropdown-toggle btn btn-white btn-dim btn-outline-light"
+                                               data-bs-toggle="dropdown">
+                                                <em class="d-none d-sm-inline icon ni ni-filter-alt"></em>
+                                                <span>Filtered By</span>
+                                                <em class="dd-indc icon ni ni-chevron-right"></em>
+                                            </a>
                                             <div class="dropdown-menu dropdown-menu-end">
                                                 <ul class="link-list-opt no-bdr">
-                                                    <li><a href="#"><span>Actived</span></a></li>
-                                                    <li><a href="#"><span>Inactived</span></a></li>
-                                                    <li><a href="#"><span>Blocked</span></a></li>
+                                                    <li><a href="#"><span>Open</span></a></li>
+                                                    <li><a href="#"><span>Closed</span></a></li>
+                                                    <li><a href="#"><span>Onhold</span></a></li>
                                                 </ul>
                                             </div>
                                         </div>
                                     </li>
-                                    <li class="nk-block-tools-opt">
-                                        <a href="#" class="btn btn-icon btn-primary d-md-none">
+                                    <li class="nk-block-tools-opt d-none d-sm-block">
+                                        <a href="{{ route('create-agent') }}" wire:navigate
+                                           class="btn btn-dim btn-primary">
                                             <em class="icon ni ni-plus"></em>
+                                            <span>Ajouter Agent</span>
                                         </a>
-                                        <a class="btn btn-primary d-none d-md-inline-flex" data-bs-toggle="modal"
-                                           href="#instructor-add">
+                                    </li>
+                                    <li class="nk-block-tools-opt d-block d-sm-none">
+                                        <a href="#" class="btn btn-icon btn-primary">
                                             <em class="icon ni ni-plus"></em>
-                                            <span>Add</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -57,11 +48,7 @@
                     </div>
                 </div>
             </div>
-            <div class="nk-block">
-                <div class="card">
-                    {{ $this->components() }}
-                </div>
-            </div>
+
         </div>
     </div>
 </div>
