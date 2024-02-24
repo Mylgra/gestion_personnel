@@ -18,7 +18,7 @@ class Agent extends Model
         'type',
         'statut',
         'document',
-        'personne_id'
+        'person_id'
     ];
 
     protected $casts = [
@@ -35,23 +35,23 @@ class Agent extends Model
         return $this->hasMany(AttributionGrade::class);
     }
 
-    public function personne(): BelongsTo
+    public function person(): BelongsTo
     {
-        return $this->belongsTo(Personne::class);
+        return $this->belongsTo(Person::class);
     }
 
     public function cessations(): HasMany
     {
-        return $this->hasMany(CessationCarriere::class);
+        return $this->hasMany(CareerBreak::class);
     }
 
     public function mobilities(): HasMany
     {
-        return $this->hasMany(MobiliteAgent::class);
+        return $this->hasMany(AgentMobility::class);
     }
 
     public function transfers(): HasMany
     {
-        return $this->hasMany(Transfert::class);
+        return $this->hasMany(Transfer::class);
     }
 }

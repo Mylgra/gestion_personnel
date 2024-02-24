@@ -1,16 +1,17 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Database\Factories;
 
-use Illuminate\Support\Arr;
+use App\Contract\Enums\PersonCivilStatusEnum;
+use App\Contract\Enums\PersonGenderEnum;
+use App\Models\Person;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Arr;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Personne>
+ * @extends Factory<Person>
  */
-class PersonneFactory extends Factory
+class PersonFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -23,14 +24,14 @@ class PersonneFactory extends Factory
             'name' => fake()->name,
             'firstname' => fake()->firstName,
             'lastname' => fake()->lastName,
-            'birthday' => fake()->date,
             'birthplace' => fake()->address,
-            'civil_status' => Arr::random(['Celibataire', 'Marié(e)','Non reconnu']),
             'contact' => fake()->phoneNumber,
             'address' => fake()->address,
-            'picture' => fake()->name,
-            'identity' => fake()->creditCardNumber,
-            'gender' => Arr::random(['Masculin','Feminin','Non reconnu'])
+            'picture' => fake()->imageUrl,
+            'identity' => fake()->uuid,
+            'birthday' => fake()->date('Y-m-d'),
+            'civil_status' => Arr::random(PersonCivilStatusEnum::cases()),
+            'gender' => Arr::random(PersonGenderEnum::cases())
         ];
     }
 }

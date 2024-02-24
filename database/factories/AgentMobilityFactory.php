@@ -1,17 +1,17 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Database\Factories;
 
+use App\Contract\Enums\MobilityAgentEnum;
 use App\Models\Agent;
-use Illuminate\Support\Arr;
+use App\Models\AgentMobility;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Arr;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\CessationCarriere>
+ * @extends Factory<AgentMobility>
  */
-class CessationCarriereFactory extends Factory
+class AgentMobilityFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -22,8 +22,10 @@ class CessationCarriereFactory extends Factory
     {
         return [
             'date' => fake()->date,
-            'motif' => Arr::random(['Deces', 'Revocation','Mise à la retraite','Démission','Autre']),
+            'motif' => Arr::random(MobilityAgentEnum::cases()),
             'document' => fake()->name,
+            'start_date' => fake()->dateTimeBetween('-1 year', 'now'),
+            'back_date' => fake()->dateTimeBetween('now', '+1 year'),
             'agent_id' => Agent::factory()->create()
         ];
     }

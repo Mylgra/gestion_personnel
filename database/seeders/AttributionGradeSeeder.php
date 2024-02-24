@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
+use App\Models\AttributionGrade;
 use Illuminate\Database\Seeder;
 
 class AttributionGradeSeeder extends Seeder
@@ -13,6 +14,6 @@ class AttributionGradeSeeder extends Seeder
      */
     public function run(): void
     {
-
+        AttributionGrade::factory(3)->create();
     }
 }

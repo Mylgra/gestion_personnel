@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-use App\Models\Personne;
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
+use App\Contract\Enums\AgentStateEnum;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 return new class () extends Migration {
     /**
@@ -16,11 +16,13 @@ return new class () extends Migration {
         Schema::create('agents', function (Blueprint $table): void {
             $table->id();
             $table->date('date')->nullable();
-            $table->enum('type', ['Politique', 'Administratif','Autres'])->nullable();
-            $table->enum('status', ['NU', 'Politique','Stagiaire','Autres','non reconnu'])->nullable();
-            $table->enum('state', ['Actif', 'Inactif','Passif'])->nullable();
+            $table->enum('type', ['Politique', 'Administratif', 'Autres'])
+                ->default('Autres');
+            $table->enum('status', ['NU', 'Politique', 'Stagiaire', 'Autres', 'non reconnu'])
+                ->default('non reconnu');
+            $table->enum('state', ['Actif', 'Inactif', 'Passif'])
+                ->default(AgentStateEnum::PASSIF->value);
             $table->string('document')->nullable();
-            $table->foreignIdFor(Personne::class)->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }
