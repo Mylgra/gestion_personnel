@@ -1,21 +1,47 @@
 @php
-
+    $label = $getLabel();
+    $name = $getName();
+    $required = $getRequired();
+    $placeholder = $getPlaceholder();
+    $minlength = $getMinLength();
+    $autofocus = $getAutofocus();
+    $maxlength = $getMaxLength();
+    $pattern = $getPattern();
+    $helpText = $getHelpText();
+    $readOnly = $getReadOnly();
+    $step = $getStep();
+    $autocomplete = $getAutocomplete();
+    $type = $getType();
+    $disable = $isDisabled();
 @endphp
+
 <div class="form-group">
-    <label class="form-label" for="">Amount</label>
+    @if($label)
+        <label class="form-label" for="{{ $name }}">{{ $label }}</label>
+    @endif
     <div class="form-control-wrap">
         <input
-            type="text"
-            class="form-control"
-            id=""
-            name=""
-            required
-            placeholder=""
-            minlength=""
-            maxlength=""
-            autocomplete=""
-            autofocus
-            wire:model.live=""
+            type="{{ $type }}"
+            class="form-control @error($name) is-invalid @enderror"
+            id="{{ $name }}"
+            name="{{ $name }}"
+            @if($required) required @endif
+            @if($placeholder)placeholder="{{ $placeholder }}" @endif
+            @if($minlength) minlength="{{ $minlength }}" @endif
+            @if($maxlength)maxlength="{{ $maxlength }}" @endif
+            @if($pattern)pattern="{{ $pattern }}" @endif
+            @if($readOnly)readonly @endif
+            @if($disable)disabled @endif
+            @if($step)step="{{ $step }}" @endif
+            @if($autocomplete)autocomplete="" @endif
+            @if($autofocus) autofocus @endif
+            wire:model="{{ $name }}"
         >
+        @error($name)
+        <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+        @if($helpText)
+            <small class="form-text text-muted">{{ $helpText }}</small>
+        @endif
     </div>
 </div>
