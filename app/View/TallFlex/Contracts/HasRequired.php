@@ -2,6 +2,8 @@
 
 namespace App\View\TallFlex\Contracts;
 
+use Closure;
+
 trait HasRequired
 {
     protected bool $required = true;
