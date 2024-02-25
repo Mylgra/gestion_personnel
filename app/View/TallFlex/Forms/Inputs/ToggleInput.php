@@ -12,28 +12,26 @@ use Illuminate\View\View;
 use Livewire\Component;
 use Throwable;
 
-class CheckboxInput extends GenerateForms implements Htmlable
+class ToggleInput extends GenerateForms implements Htmlable
 {
     use HasLabel;
-    use HasRequired;
     use HasChecked;
+    use HasRequired;
 
     protected string $uniqueId;
 
     protected Component $livewire;
 
-    protected string|null $tooltip = null;
-
     public function __construct(
-        public string $name
+        public string $name,
     )
     {
-        $this->uniqueId = uniqid('checkbox-' . $this->name, true);
+        $this->uniqueId = uniqid('toggle-' . $this->name, true);
     }
 
-    public static function make(string $name): static
+    public static function make(string $name): self
     {
-        return new static($name);
+        return new self($name);
     }
 
     public function getName(): string
@@ -56,17 +54,6 @@ class CheckboxInput extends GenerateForms implements Htmlable
         return $this->evaluate($this->uniqueId);
     }
 
-    public function tooltip(string $tooltip): static
-    {
-        $this->tooltip = $tooltip;
-        return $this;
-    }
-
-    public function getTooltip(): string|null
-    {
-        return $this->evaluate($this->tooltip);
-    }
-
     /**
      * @throws Throwable
      */
@@ -77,6 +64,6 @@ class CheckboxInput extends GenerateForms implements Htmlable
 
     public function render(): View
     {
-        return view('components.forms.checkbox', $this->extractPublicMethods());
+        return view('components.forms.toggle', $this->extractPublicMethods());
     }
 }

@@ -10,10 +10,8 @@
                     </a>
                 </li>
             </x-brandcrumb>
-            <small>
-                Character count: <span x-text="$wire.person_id.length"></span>
-            </small>
-            {{ $this->components() }}
+            <div x-text="$wire.person_id"></div>
+            {{ $this->component() }}
         </div>
     </div>
 </div>

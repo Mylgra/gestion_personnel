@@ -4,10 +4,8 @@ namespace App\Livewire\Domains\Agents;
 
 use App\Models\Person;
 use App\View\TallFlex\Forms\FormBuilder;
-use App\View\TallFlex\Forms\FormSection;
-use App\View\TallFlex\Forms\Inputs\CheckboxInput;
 use App\View\TallFlex\Forms\Inputs\SelectInput;
-use App\View\TallFlex\Forms\Inputs\ToggleInput;
+use App\View\TallFlex\Forms\Inputs\TextInput;
 use Illuminate\View\View;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
@@ -15,8 +13,9 @@ use Livewire\Component;
 #[Layout('layouts.guest')]
 class CreateAgent extends Component
 {
-    public string $person_id = '';
-    public bool $terms;
+    public $username = '';
+    public $person_id = '';
+    public $agent_id = '';
 
     public function render(): View
     {
@@ -25,33 +24,32 @@ class CreateAgent extends Component
 
     public function storeData()
     {
-        dd($this->terms);
+        dd($this->all());
     }
 
-    public function components()
+    public function component()
     {
         return FormBuilder::make()
             ->schema([
-                FormSection::make('Personal Information')
-                    ->description('Please enter your personal information.')
-                    ->schema([
-                        SelectInput::make('person_id')
-                            ->label('Select the name of user')
-                            ->options(Person::query()->pluck('name', 'id'))
-                            //->searchable()
-                            // ->multiple()
-                            ->placeholder('Enter your name')
-                            ->required(),
-                    ])
-                    ->column(2),
-                ToggleInput::make('terms')
-                    ->label('I agree to the terms and conditions')
-                    ->checked()
-                    ->required(),
-                CheckboxInput::make('terms')
-                    ->label('I agree to the terms and conditions')
-                    ->checked()
-                    ->required(),
-            ]);
+                TextInput::make('username')
+                    ->label('Enter your username')
+                    ->placeholder('Enter your username')
+                    ->required()
+                    ->maxLength(4)
+                    ->minLength(4),
+                SelectInput::make('person_id')
+                    ->placeholder('Select person')
+                    ->label('Select person')
+                    ->options(Person::query()->pluck('name', 'id'))
+                    ->multiple()
+                    ->searchable(),
+                SelectInput::make('agent_id')
+                    ->placeholder('Select person')
+                    ->label('Select person')
+                    ->options(Person::query()->pluck('name', 'id'))
+                    ->multiple()
+                    ->searchable()
+            ])
+            ->column(2);
     }
 }
