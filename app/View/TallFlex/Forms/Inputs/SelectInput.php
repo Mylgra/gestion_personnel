@@ -31,16 +31,38 @@ class SelectInput extends GenerateForms implements Htmlable
     protected bool $autocomplete = false;
     protected string $autocapitalize = 'off';
     protected bool $disabled = false;
+    protected string $uniqueId;
 
     public function __construct(
         public string $name
     )
     {
+        $this->uniqueId = uniqid('select-' . $this->name, true);
     }
 
     public static function make(string $name): static
     {
         return new static($name);
+    }
+
+    public function getUniqueId(): string
+    {
+        return $this->evaluate($this->uniqueId);
+    }
+
+    public function evaluate(mixed $value)
+    {
+        if ($value instanceof Closure) {
+            return app()->call($value, [
+                'state' => $this->livewire->{$this->getName()},
+            ]);
+        }
+        return $value;
+    }
+
+    public function getName(): string
+    {
+        return $this->evaluate($this->name);
     }
 
     /**
@@ -70,21 +92,6 @@ class SelectInput extends GenerateForms implements Htmlable
     public function getOptions()
     {
         return $this->evaluate($this->options);
-    }
-
-    public function evaluate(mixed $value)
-    {
-        if ($value instanceof Closure) {
-            return app()->call($value, [
-                'state' => $this->livewire->{$this->getName()},
-            ]);
-        }
-        return $value;
-    }
-
-    public function getName(): string
-    {
-        return $this->evaluate($this->name);
     }
 
     public function native(bool $native = true): static

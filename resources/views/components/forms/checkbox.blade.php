@@ -4,18 +4,19 @@
     $required = $getRequired();
     $tooltip = $getTooltip();
     $checked = $getChecked();
+    $uniqueId = $getUniqueId();
 @endphp
 <div class="custom-control custom-checkbox ">
     <input
         type="checkbox"
         class="custom-control-input"
-        id="{{ $name }}"
+        id="{{ $uniqueId }}"
         name="{{ $name }}"
         wire:model="{{ $name }}"
         @if($required) required @endif
         @if($checked) checked @endif
     >
-    <label class="custom-control-label custom-label" for="{{ $name }}" title="{{ $tooltip }}">
+    <label class="custom-control-label custom-label" for="{{ $uniqueId }}" title="{{ $tooltip }}">
         {{ $label }}
     </label>
 </div>

@@ -13,17 +13,18 @@
     $autocomplete = $getAutocomplete();
     $type = $getType();
     $disable = $isDisabled();
+    $uniqueId = $getUniqueId();
 @endphp
 
 <div class="form-group">
     @if($label)
-        <label class="form-label" for="{{ $name }}">{{ $label }}</label>
+        <label class="form-label" for="{{ $uniqueId }}">{{ $label }}</label>
     @endif
     <div class="form-control-wrap">
         <input
             type="{{ $type }}"
             class="form-control @error($name) is-invalid @enderror"
-            id="{{ $name }}"
+            id="{{ $uniqueId }}"
             name="{{ $name }}"
             @if($required) required @endif
             @if($placeholder)placeholder="{{ $placeholder }}" @endif

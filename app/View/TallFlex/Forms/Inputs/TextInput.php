@@ -39,16 +39,38 @@ class TextInput extends GenerateForms implements Htmlable
     protected bool|Closure $isReadOnly = false;
 
     protected bool $autocomplete = false;
+    protected string $uniqueId;
 
     public function __construct(
         protected string $name,
     )
     {
+        $this->uniqueId = uniqid('input-' . $this->name, true);
     }
 
     public static function make(string $name): static
     {
         return app(static::class, ['name' => $name]);
+    }
+
+    public function getUniqueId(): string
+    {
+        return $this->evaluate($this->uniqueId);
+    }
+
+    public function evaluate(mixed $value)
+    {
+        if ($value instanceof Closure) {
+            return app()->call($value, [
+                'state' => $this->livewire->{$this->getName()},
+            ]);
+        }
+        return $value;
+    }
+
+    public function getName(): string
+    {
+        return $this->evaluate($this->name);
     }
 
     public function livewire(Component $livewire): static
@@ -81,21 +103,6 @@ class TextInput extends GenerateForms implements Htmlable
     public function getType(): string|Closure|null
     {
         return $this->evaluate($this->type) ?? "text";
-    }
-
-    public function evaluate(mixed $value)
-    {
-        if ($value instanceof Closure) {
-            return app()->call($value, [
-                'state' => $this->livewire->{$this->getName()},
-            ]);
-        }
-        return $value;
-    }
-
-    public function getName(): string
-    {
-        return $this->evaluate($this->name);
     }
 
     public function minLength(int $minimum): static

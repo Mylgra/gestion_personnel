@@ -18,6 +18,9 @@ class CheckboxInput extends GenerateForms implements Htmlable
     use HasRequired;
     use HasChecked;
 
+
+    protected string $uniqueId;
+
     protected Component $livewire;
 
     protected string|null $tooltip = null;
@@ -26,6 +29,7 @@ class CheckboxInput extends GenerateForms implements Htmlable
         public string $name
     )
     {
+        $this->uniqueId = uniqid('checkbox-' . $this->name, true);
     }
 
     public static function make(string $name): static
@@ -46,6 +50,11 @@ class CheckboxInput extends GenerateForms implements Htmlable
             ]);
         }
         return $value;
+    }
+
+    public function getUniqueId(): string
+    {
+        return $this->evaluate($this->uniqueId);
     }
 
     public function tooltip(string $tooltip): static

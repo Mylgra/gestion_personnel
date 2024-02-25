@@ -7,6 +7,7 @@ use App\View\TallFlex\Forms\FormBuilder;
 use App\View\TallFlex\Forms\FormSection;
 use App\View\TallFlex\Forms\Inputs\CheckboxInput;
 use App\View\TallFlex\Forms\Inputs\SelectInput;
+use App\View\TallFlex\Forms\Inputs\ToggleInput;
 use Illuminate\View\View;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
@@ -43,10 +44,13 @@ class CreateAgent extends Component
                             ->required(),
                     ])
                     ->column(2),
-                CheckboxInput::make('terms')
-                    //->label('I agree to the terms and conditions')
+                ToggleInput::make('terms')
+                    ->label('I agree to the terms and conditions')
                     ->checked()
-                    ->tooltip('Please read the terms and conditions before proceeding.')
+                    ->required(),
+                CheckboxInput::make('terms')
+                    ->label('I agree to the terms and conditions')
+                    ->checked()
                     ->required(),
             ]);
     }

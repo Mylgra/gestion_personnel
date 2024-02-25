@@ -8,11 +8,12 @@
     $require = $getRequired();
     $placeholder = $getPlaceholder();
     $autofocus = $getAutofocus();
+    $uniqueId = $getUniqueId();
 @endphp
 
-<div class="form-group" wire:key="{{$name}}">
+<div class="form-group" wire:key="{{$uniqueId }}">
     @if($label)
-        <label class="form-label" for="{{ $name }}">{{ $label }}</label>
+        <label class="form-label" for="{{ $uniqueId  }}">{{ $label }}</label>
     @endif
     <div class="form-control-wrap">
         <select
@@ -22,7 +23,7 @@
             @if($placeholder)data-placeholder="{{ $placeholder }}" @endif
             wire:model.live="{{ $name }}"
             wire:change="{{ $name }}"
-            id="{{ $name }}"
+            id="{{ $uniqueId  }}"
             name="{{ $name }}"
             @if($autofocus) autofocus @endif
             autocomplete="{{ $getAutocomplete() ? 'on' : 'off' }}"
