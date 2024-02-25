@@ -5,6 +5,7 @@ namespace App\Livewire\Domains\Agents;
 use App\Models\Person;
 use App\View\TallFlex\Forms\FormBuilder;
 use App\View\TallFlex\Forms\FormSection;
+use App\View\TallFlex\Forms\Inputs\CheckboxInput;
 use App\View\TallFlex\Forms\Inputs\SelectInput;
 use Illuminate\View\View;
 use Livewire\Attributes\Layout;
@@ -14,6 +15,7 @@ use Livewire\Component;
 class CreateAgent extends Component
 {
     public string $person_id = '';
+    public bool $terms;
 
     public function render(): View
     {
@@ -22,7 +24,7 @@ class CreateAgent extends Component
 
     public function storeData()
     {
-        dd($this->person_id);
+        dd($this->terms);
     }
 
     public function components()
@@ -41,6 +43,11 @@ class CreateAgent extends Component
                             ->required(),
                     ])
                     ->column(2),
+                CheckboxInput::make('terms')
+                    //->label('I agree to the terms and conditions')
+                    ->checked()
+                    ->tooltip('Please read the terms and conditions before proceeding.')
+                    ->required(),
             ]);
     }
 }
