@@ -6,7 +6,7 @@ trait HasRequired
 {
     protected bool $required = true;
 
-    
+
     public function required(bool|Closure $condition = true): self
     {
         $this->required = $condition;
@@ -16,6 +16,6 @@ trait HasRequired
 
     public function getRequired(): bool
     {
-        return (bool)$this->required;
+        return (bool)$this->evaluate($this->required);
     }
 }

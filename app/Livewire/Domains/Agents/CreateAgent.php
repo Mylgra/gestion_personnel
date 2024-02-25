@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Domains\Agents;
 
+use App\Models\Person;
 use App\View\TallFlex\Forms\FormBuilder;
 use App\View\TallFlex\Forms\FormSection;
 use App\View\TallFlex\Forms\Inputs\SelectInput;
@@ -12,7 +13,7 @@ use Livewire\Component;
 #[Layout('layouts.guest')]
 class CreateAgent extends Component
 {
-    public string|null $name = null;
+    public string $person_id = '';
 
     public function render(): View
     {
@@ -21,7 +22,7 @@ class CreateAgent extends Component
 
     public function storeData()
     {
-        dd($this->name);
+        dd($this->person_id);
     }
 
     public function components()
@@ -31,16 +32,11 @@ class CreateAgent extends Component
                 FormSection::make('Personal Information')
                     ->description('Please enter your personal information.')
                     ->schema([
-                        SelectInput::make('name')
-                            ->label('Name')
-                            ->options([
-                                'John Doe',
-                                'Jane Doe',
-                                'John Smith',
-                                'Jane Smith',
-                            ])
-                            ->searchable()
-                            ->multiple()
+                        SelectInput::make('person_id')
+                            ->label('Select the name of user')
+                            ->options(Person::query()->pluck('name', 'id'))
+                            //->searchable()
+                            // ->multiple()
                             ->placeholder('Enter your name')
                             ->required(),
                     ])

@@ -9,7 +9,8 @@
     $placeholder = $getPlaceholder();
     $autofocus = $getAutofocus();
 @endphp
-<div class="form-group">
+
+<div class="form-group" wire:key="{{$name}}">
     @if($label)
         <label class="form-label" for="{{ $name }}">{{ $label }}</label>
     @endif
@@ -19,26 +20,35 @@
             @if($searchable) data-search="on" @endif
             @if($multiple) multiple="multiple" @endif
             @if($placeholder)data-placeholder="{{ $placeholder }}" @endif
-            wire:model="{{ $name }}"
+            wire:model.live="{{ $name }}"
+            wire:change="{{ $name }}"
             id="{{ $name }}"
             name="{{ $name }}"
             @if($autofocus) autofocus @endif
             autocomplete="{{ $getAutocomplete() ? 'on' : 'off' }}"
-            autocapitalize="{{ $getAutocapitalize() }}"
             @if($getDisabled()) disabled @endif
         >
-            <option value="default_option">Default Option</option>
+            <option disabled>{{ $placeholder }}</option>
             @foreach($options as $key => $value)
                 @if(is_array($value))
                     <optgroup label="{{ $key }}">
                         @foreach($value as $subKey => $subValue)
-                            <option value="{{ $subKey }}">{{ $subValue }}</option>
+                            <option
+                                value="{{ $subKey }}"
+                                @if($subKey == old($name, $name)) selected @endif
+                            >{{ $subValue }}</option>
                         @endforeach
                     </optgroup>
                 @else
-                    <option value="{{ $key }}">{{ $value }}</option>
+                    <option
+                        value="{{ $key }}"
+                        @if($key == old($name, $name)) selected @endif
+                    >{{ $value }}</option>
                 @endif
             @endforeach
         </select>
+        @error($name)
+        <span class="invalid-feedback">{{ $message }}</span>
+        @enderror
     </div>
 </div>

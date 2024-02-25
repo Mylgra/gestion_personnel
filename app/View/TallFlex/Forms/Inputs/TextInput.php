@@ -6,8 +6,8 @@ namespace App\View\TallFlex\Forms\Inputs;
 
 use App\View\TallFlex\Contracts\HasLabel;
 use App\View\TallFlex\Contracts\HasPlaceholder;
+use App\View\TallFlex\Contracts\HasRequired;
 use App\View\TallFlex\Forms\GenerateForms;
-use App\View\TallFlex\Forms\HasExstractPublicMethods;
 use Closure;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\View\View;
@@ -16,8 +16,8 @@ use Throwable;
 
 class TextInput extends GenerateForms implements Htmlable
 {
-    use HasExstractPublicMethods;
     use HasPlaceholder;
+    use HasRequired;
     use HasLabel;
 
     protected Component $livewire;
@@ -95,19 +95,7 @@ class TextInput extends GenerateForms implements Htmlable
 
     public function getName(): string
     {
-        return $this->name;
-    }
-
-    public function required(bool|Closure $condition = true): self
-    {
-        $this->required = $condition;
-
-        return $this;
-    }
-
-    public function getRequired(): bool
-    {
-        return (bool)$this->required;
+        return $this->evaluate($this->name);
     }
 
     public function minLength(int $minimum): static
@@ -119,7 +107,7 @@ class TextInput extends GenerateForms implements Htmlable
 
     public function getMinLength(): int|Closure|null
     {
-        return $this->minimum;
+        return $this->evaluate($this->minimum) ?? null;
     }
 
     public function disabled(bool|Closure $disabled): static
@@ -155,7 +143,7 @@ class TextInput extends GenerateForms implements Htmlable
 
     public function getMaxLength(): int|Closure|null
     {
-        return $this->maxValue;
+        return $this->evaluate($this->maxValue) ?? null;
     }
 
     public function pattern(string $pattern): static
@@ -167,7 +155,7 @@ class TextInput extends GenerateForms implements Htmlable
 
     public function getPattern(): string|Closure|null
     {
-        return $this->pattern;
+        return $this->evaluate($this->pattern) ?? null;
     }
 
     public function helpText(string $helpText): static
@@ -186,7 +174,7 @@ class TextInput extends GenerateForms implements Htmlable
 
     public function getReadOnly(): bool
     {
-        return $this->isReadOnly;
+        return (bool)$this->evaluate($this->isReadOnly);
     }
 
     public function step(int|float|string|Closure|null $interval): static
@@ -203,7 +191,7 @@ class TextInput extends GenerateForms implements Htmlable
 
     public function getAutocomplete(): bool
     {
-        return $this->autocomplete;
+        return $this->evaluate($this->autocomplete);
     }
 
     public function getHelpText(): string|Closure|null

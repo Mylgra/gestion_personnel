@@ -38,7 +38,7 @@
             wire:model="{{ $name }}"
         >
         @error($name)
-        <div class="invalid-feedback">{{ $message }}</div>
+        <span class="invalid-feedback">{{ $message }}</span>
         @enderror
         @if($helpText)
             <small class="form-text text-muted">{{ $helpText }}</small>
