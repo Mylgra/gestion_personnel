@@ -18,8 +18,6 @@ class RadioInput extends GenerateForms implements Htmlable
     use HasRequired;
     use HasChecked;
 
-    protected string $uniqueId;
-
     protected Component $livewire;
 
     protected array $options = [];
@@ -30,7 +28,6 @@ class RadioInput extends GenerateForms implements Htmlable
         public string $name
     )
     {
-        $this->uniqueId = uniqid('radio-' . $this->name, true);
     }
 
     public static function make(string $name): static
@@ -38,9 +35,15 @@ class RadioInput extends GenerateForms implements Htmlable
         return new static($name);
     }
 
-    public function getUniqueId(): string
+    public function inline(): static
     {
-        return $this->evaluate($this->uniqueId);
+        $this->inline = true;
+        return $this;
+    }
+
+    public function isInline(): bool
+    {
+        return $this->evaluate($this->inline);
     }
 
     public function evaluate(mixed $value)
@@ -56,17 +59,6 @@ class RadioInput extends GenerateForms implements Htmlable
     public function getName()
     {
         return $this->evaluate($this->name);
-    }
-
-    public function inline(): static
-    {
-        $this->inline = true;
-        return $this;
-    }
-
-    public function isInline(): bool
-    {
-        return $this->evaluate($this->inline);
     }
 
     public function boolean(): static
