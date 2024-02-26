@@ -20,4 +20,7 @@
     <label class="custom-control-label custom-label" for="{{ $uniqueId }}" title="{{ $tooltip }}">
         {{ $label }}
     </label>
+    @error($name)
+    <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
 </div>

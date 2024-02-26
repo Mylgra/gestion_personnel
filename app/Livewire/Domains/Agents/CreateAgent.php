@@ -2,20 +2,19 @@
 
 namespace App\Livewire\Domains\Agents;
 
-use App\Models\Person;
 use App\View\TallFlex\Forms\FormBuilder;
-use App\View\TallFlex\Forms\Inputs\SelectInput;
-use App\View\TallFlex\Forms\Inputs\TextInput;
+use App\View\TallFlex\Forms\Inputs\TimePicker;
 use Illuminate\View\View;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Rule;
 use Livewire\Component;
 
 #[Layout('layouts.guest')]
 class CreateAgent extends Component
 {
-    public $username = '';
-    public $person_id = '';
-    public $agent_id = '';
+    #[Rule('required')]
+    public $start_time = '';
+    public $end_time = '';
 
     public function render(): View
     {
@@ -24,6 +23,7 @@ class CreateAgent extends Component
 
     public function storeData()
     {
+        $this->validate();
         dd($this->all());
     }
 
@@ -31,24 +31,17 @@ class CreateAgent extends Component
     {
         return FormBuilder::make()
             ->schema([
-                TextInput::make('username')
-                    ->label('Enter your username')
-                    ->placeholder('Enter your username')
-                    ->required()
-                    ->maxLength(4)
-                    ->minLength(4),
-                SelectInput::make('person_id')
-                    ->placeholder('Select person')
-                    ->label('Select person')
-                    ->options(Person::query()->pluck('name', 'id'))
-                    ->multiple()
-                    ->searchable(),
-                SelectInput::make('agent_id')
-                    ->placeholder('Select person')
-                    ->label('Select person')
-                    ->options(Person::query()->pluck('name', 'id'))
-                    ->multiple()
-                    ->searchable()
+                TimePicker::make('start_time')
+                    ->label('Start time')
+                    ->placeholder('Select a start time')
+                    ->format('H:i')
+                    ->datalist(['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00'])
+                    ->required(),
+                TimePicker::make('end_time')
+                    ->label('End time')
+                    ->placeholder('Select an end time')
+                    ->format('H:i')
+                    ->required(),
             ])
             ->column(2);
     }

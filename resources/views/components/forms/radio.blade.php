@@ -25,5 +25,8 @@
                    for="{{ $name }}_{{ $value }}"
             >{{ $option }}</label>
         </div>
+        @error($name)
+        <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
     @endforeach
 </div>

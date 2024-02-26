@@ -16,8 +16,9 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-    <script src="{{ asset('assets/js/bundle.js') }}" data-navigate-track data-navigate-once></script>
-    <script src="{{ asset('assets/js/scripts.js') }}" data-navigate-track data-navigate-once></script>
+    <script src="{{ asset('assets/js/bundle.js') }}"></script>
+    <script src="{{ asset('assets/js/scripts.js') }}"></script>
+    @stack('styles')
 </head>
 <body class="nk-body bg-lighter npc-default has-sidebar ui-bordered">
 <div class="nk-app-root">
@@ -32,5 +33,6 @@
         </div>
     </div>
 </div>
+@stack('scripts')
 </body>
 </html>

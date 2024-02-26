@@ -10,7 +10,7 @@
                     </a>
                 </li>
             </x-brandcrumb>
-            <div x-text="$wire.person_id"></div>
+           
             {{ $this->component() }}
         </div>
     </div>
