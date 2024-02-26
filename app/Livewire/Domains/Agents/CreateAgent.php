@@ -3,18 +3,18 @@
 namespace App\Livewire\Domains\Agents;
 
 use App\View\TallFlex\Forms\FormBuilder;
-use App\View\TallFlex\Forms\Inputs\TimePicker;
+use App\View\TallFlex\Forms\Inputs\FileUpload;
 use Illuminate\View\View;
 use Livewire\Attributes\Layout;
-use Livewire\Attributes\Rule;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 #[Layout('layouts.guest')]
 class CreateAgent extends Component
 {
-    #[Rule('required')]
-    public $start_time = '';
-    public $end_time = '';
+    use WithFileUploads;
+
+    public array $profile = [];
 
     public function render(): View
     {
@@ -23,7 +23,6 @@ class CreateAgent extends Component
 
     public function storeData()
     {
-        $this->validate();
         dd($this->all());
     }
 
@@ -31,17 +30,13 @@ class CreateAgent extends Component
     {
         return FormBuilder::make()
             ->schema([
-                TimePicker::make('start_time')
-                    ->label('Start time')
-                    ->placeholder('Select a start time')
-                    ->format('H:i')
-                    ->datalist(['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00'])
-                    ->required(),
-                TimePicker::make('end_time')
-                    ->label('End time')
-                    ->placeholder('Select an end time')
-                    ->format('H:i')
-                    ->required(),
+                FileUpload::make('profile')
+                    ->directory('public')
+                    ->reorder()
+                    ->maxFileSize('3MB')
+                    ->required()
+                    ->allowImagePreview()
+                    ->allowImageCrop()
             ])
             ->column(2);
     }

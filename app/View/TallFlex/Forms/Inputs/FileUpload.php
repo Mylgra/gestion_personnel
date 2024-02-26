@@ -29,6 +29,18 @@ class FileUpload extends GenerateForms implements Htmlable
     protected bool|Closure $reorder = false;
 
     protected bool|Closure $dropped = false;
+    protected bool|Closure $allowRevert = true;
+    protected bool|Closure $allowImagePreview = true;
+    protected bool|Closure $allowImageCrop = true;
+    protected bool|Closure $allowProcess = true;
+    protected int|Closure $fileSizeBase = 1000;
+
+    protected bool|Closure $allowFileSizeValidation = false;
+
+    protected bool|Closure $allowFileTypeValidation = false;
+
+    protected bool|Closure $allowRemove = true;
+    protected int|Closure $maxParallelUploads = 3;
 
     public function __construct(
         public string $name,
@@ -68,9 +80,23 @@ class FileUpload extends GenerateForms implements Htmlable
         return $this;
     }
 
-    public function getMultiple(): bool
+    public function allowFileSizeValidation(bool $allowFileSizeValidation = true): static
     {
-        return (bool)$this->evaluate($this->multiple);
+        $this->allowFileSizeValidation = $allowFileSizeValidation;
+
+        return $this;
+    }
+
+    public function allowFileTypeValidation(bool $allowFileTypeValidation = true): static
+    {
+        $this->allowFileTypeValidation = $allowFileTypeValidation;
+
+        return $this;
+    }
+
+    public function isAllowFileTypeValidation(): bool
+    {
+        return (bool)$this->evaluate($this->allowFileTypeValidation);
     }
 
     public function evaluate(mixed $value)
@@ -86,6 +112,16 @@ class FileUpload extends GenerateForms implements Htmlable
     public function getName(): string
     {
         return $this->evaluate($this->name);
+    }
+
+    public function isAllowFileSizeValidation(): bool
+    {
+        return (bool)$this->evaluate($this->allowFileSizeValidation);
+    }
+
+    public function getMultiple(): bool
+    {
+        return (bool)$this->evaluate($this->multiple);
     }
 
     public function reorder(bool $reorder = true): static
@@ -111,7 +147,7 @@ class FileUpload extends GenerateForms implements Htmlable
         return $this->evaluate($this->fileSize);
     }
 
-    public function accepts(string $accepts): static
+    public function acceptedFileTypes(string $accepts): static
     {
         $this->accepts = $accepts;
         return $this;
@@ -132,5 +168,82 @@ class FileUpload extends GenerateForms implements Htmlable
     public function getAccepts(): string|null
     {
         return $this->evaluate($this->accepts);
+    }
+
+    public function allowRevert(bool $allowRevert = true): static
+    {
+        $this->allowRevert = $allowRevert;
+        return $this;
+    }
+
+    public function getAllowRevert(): bool
+    {
+        return (bool)$this->evaluate($this->allowRevert);
+    }
+
+    public function allowImagePreview(bool $allowImagePreview = true): static
+    {
+        $this->allowImagePreview = $allowImagePreview;
+        return $this;
+    }
+
+    public function getAllowImagePreview(): bool
+    {
+        return (bool)$this->evaluate($this->allowImagePreview);
+    }
+
+    public function allowImageCrop(bool $allowImageCrop = true): static
+    {
+        $this->allowImageCrop = $allowImageCrop;
+        return $this;
+    }
+
+    public function getAllowImageCrop(): bool
+    {
+        return (bool)$this->evaluate($this->allowImageCrop);
+    }
+
+    public function allowProcess(bool $allowProcess = true): static
+    {
+        $this->allowProcess = $allowProcess;
+        return $this;
+    }
+
+    public function getAllowProcess(): bool
+    {
+        return (bool)$this->evaluate($this->allowProcess);
+    }
+
+    public function fileSizeBase(int $fileSizeBase = 1000): static
+    {
+        $this->fileSizeBase = $fileSizeBase;
+        return $this;
+    }
+
+    public function getFileSizeBase(): int
+    {
+        return (int)$this->evaluate($this->fileSizeBase);
+    }
+
+    public function allowRemove(bool $allowRemove = true): static
+    {
+        $this->allowRemove = $allowRemove;
+        return $this;
+    }
+
+    public function getAllowRemove(): bool
+    {
+        return (bool)$this->evaluate($this->allowRemove);
+    }
+
+    public function maxParallelUploads(int $maxParallelUploads = 3): static
+    {
+        $this->maxParallelUploads = $maxParallelUploads;
+        return $this;
+    }
+
+    public function getMaxParallelUploads(): int
+    {
+        return (int)$this->evaluate($this->maxParallelUploads);
     }
 }

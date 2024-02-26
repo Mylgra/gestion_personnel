@@ -12,6 +12,18 @@
     wire:ignore
     x-data="{
         initFilePond() {
+            @if($isAllowFileSizeValidation())
+                FilePond.registerPlugin(FilePondPluginFileValidateSize);
+            @endif
+            @if($isAllowFileTypeValidation())
+                FilePond.registerPlugin(FilePondPluginFileValidateType);
+            @endif
+            @if($getAllowImageCrop())
+                FilePond.registerPlugin(FilePondPluginImageCrop);
+            @endif
+            @if($getAllowImagePreview())
+                FilePond.registerPlugin(FilePondPluginImagePreview);
+            @endif
             const input = this.$refs.input;
             const pond = FilePond.create(input);
             pond.setOptions({
@@ -22,6 +34,16 @@
                 @if($getDropped())allowDrop: true, @endif
                 @if($reorder)allowReorder: true,@endif
                 @if($fileSize)maxFileSize:'{{ $fileSize }}', @endif
+                allowRevert: {{ $getAllowRevert() ? 'true' : 'false' }},
+                allowImagePreview: {{ $getAllowImagePreview() ? 'true' : 'false' }},
+                allowImageCrop: {{ $getAllowImageCrop() ? 'true' : 'false' }},
+                allowProcess: {{ $getAllowProcess() ? 'true' : 'false' }},
+                fileSizeBase: '{{ $getFileSizeBase() }}',
+                allowRemove: {{ $getAllowRemove() ? 'true' : 'false' }},
+                maxParallelUploads: '{{ $getMaxParallelUploads() }}',
+                allowFileTypeValidation: {{ $isAllowFileTypeValidation() ? 'true': 'false' }},
+                allowFileSizeValidation: {{ $isAllowFileSizeValidation() ? 'true' : 'false' }},
+                credits:{},
                 server: {
                     process: (fieldName, file, metadata, load, error, progress, abort, transfer, options) => {
                         @this.upload('{{ $name }}', file, load, error, progress);
@@ -56,9 +78,19 @@
 
 @push('styles')
     <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
+    <link
+        href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"
+        rel="stylesheet"
+    />
 @endpush
 
 @push('scripts')
+    <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-image-crop/dist/filepond-plugin-image-crop.js"></script>
+    <script
+        src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
+    <script
+        src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js"></script>
     <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
 @endpush
 
