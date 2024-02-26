@@ -1,0 +1,64 @@
+@php
+    $name = $getName();
+    $label = $getLabel();
+    $required = $getRequired();
+    $multiple = $getMultiple();
+    $reorder = $getReorder();
+    $fileSize = $getFileSize();
+    $accepts = $getAccepts();
+@endphp
+<div
+    class="form-group"
+    wire:ignore
+    x-data="{
+        initFilePond() {
+            const input = this.$refs.input;
+            const pond = FilePond.create(input);
+            pond.setOptions({
+                @if($multiple) allowMultiple: true, @endif
+                labelIdle: `Drag & Drop your picture or Browse`,
+                acceptedFileTypes: ['{{ $accepts }}'],
+                @if($required)required: true, @endif
+                @if($getDropped())allowDrop: true, @endif
+                @if($reorder)allowReorder: true,@endif
+                @if($fileSize)maxFileSize:'{{ $fileSize }}', @endif
+                server: {
+                    process: (fieldName, file, metadata, load, error, progress, abort, transfer, options) => {
+                        @this.upload('{{ $name }}', file, load, error, progress);
+                    },
+                    revert: (filename, load) => {
+                        @this.removeUpload('{{ $name }}', filename, load);
+                    }
+                },
+            });
+        }
+    }"
+    x-init="initFilePond"
+>
+    @if($label)
+        <label class="form-label" for="{{ $name }}">{{ $label }}</label>
+    @endif
+    <div class="form-control-wrap ">
+        <input
+            type="file"
+            class="border round-xl"
+            id="{{ $name }}"
+            name="{{ $name }}"
+            x-ref="input"
+            @if($required) required @endif
+            wire:model="{{ $name }}"
+            @if($multiple) multiple @endif
+            @if($reorder)data-allow-reorder="true" @endif
+            @if($fileSize)data-max-file-size="{{ $fileSize }}" @endif
+        >
+    </div>
+</div>
+
+@push('styles')
+    <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
+@endpush
+
+@push('scripts')
+    <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
+@endpush
+
