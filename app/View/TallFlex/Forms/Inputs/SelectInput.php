@@ -32,6 +32,7 @@ class SelectInput extends GenerateForms implements Htmlable
     protected bool $autocomplete = false;
     protected string $autocapitalize = 'off';
     protected string $uniqueId;
+    protected bool $live = false;
 
     public function __construct(
         public string $name
@@ -154,5 +155,16 @@ class SelectInput extends GenerateForms implements Htmlable
     public function getAutocapitalize(): string
     {
         return $this->evaluate($this->autocapitalize);
+    }
+
+    public function live(bool $live = true): static
+    {
+        $this->live = $live;
+        return $this;
+    }
+
+    public function getLive(): bool
+    {
+        return $this->evaluate($this->live);
     }
 }
