@@ -2,7 +2,7 @@
 
 namespace App\View\TallFlex\Menus;
 
-use App\View\TallFlex\Forms\HasExstractPublicMethods;
+use App\View\TallFlex\Contracts\HasExtractPublicMethods;
 use App\View\TallFlex\Menus\Links\LinkItems;
 use Closure;
 use Illuminate\Contracts\Support\Htmlable;
@@ -14,7 +14,7 @@ use Livewire\Component;
 
 class Sidebar extends Component implements Htmlable
 {
-    use HasExstractPublicMethods;
+    use HasExtractPublicMethods;
     use Macroable;
 
     protected string|Closure|null $logo = null;

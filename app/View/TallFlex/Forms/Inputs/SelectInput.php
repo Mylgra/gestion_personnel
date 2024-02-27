@@ -8,14 +8,15 @@ use App\View\TallFlex\Contracts\HasLabel;
 use App\View\TallFlex\Contracts\HasPlaceholder;
 use App\View\TallFlex\Contracts\HasRequired;
 use App\View\TallFlex\Contracts\HasRule;
-use App\View\TallFlex\Forms\GenerateForms;
+use App\View\TallFlex\Forms\GenericForms;
+use Closure;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\View\View;
 use Throwable;
 
-class SelectInput extends GenerateForms implements Htmlable
+class SelectInput extends GenericForms implements Htmlable
 {
     use HasEvaluated;
     use HasLabel;
@@ -69,9 +70,11 @@ class SelectInput extends GenerateForms implements Htmlable
         return view('components.forms.select', $this->extractPublicMethods());
     }
 
-    public function options($options): static
+    public function options(array|Closure|null $options): static
     {
-        if ($options instanceof Model) {
+        if ($options instanceof Closure) {
+            $this->options = $options();
+        } elseif ($options instanceof Model) {
             $this->options = $options->toArray();
         } else {
             $this->options = $options;

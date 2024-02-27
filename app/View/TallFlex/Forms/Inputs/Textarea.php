@@ -8,13 +8,13 @@ use App\View\TallFlex\Contracts\HasLabel;
 use App\View\TallFlex\Contracts\HasPlaceholder;
 use App\View\TallFlex\Contracts\HasReadOnly;
 use App\View\TallFlex\Contracts\HasRequired;
-use App\View\TallFlex\Forms\GenerateForms;
+use App\View\TallFlex\Forms\GenericForms;
 use Closure;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\View\View;
 use Throwable;
 
-class Textarea extends GenerateForms implements Htmlable
+class Textarea extends GenericForms implements Htmlable
 {
     use HasEvaluated;
     use HasLabel;

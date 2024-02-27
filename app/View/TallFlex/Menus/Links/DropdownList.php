@@ -2,15 +2,15 @@
 
 namespace App\View\TallFlex\Menus\Links;
 
-use App\View\TallFlex\Forms\GenerateForms;
-use App\View\TallFlex\Forms\HasExstractPublicMethods;
+use App\View\TallFlex\Contracts\HasExtractPublicMethods;
+use App\View\TallFlex\Forms\GenericForms;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\View\View;
 use Throwable;
 
-class DropdownList extends GenerateForms implements Htmlable
+class DropdownList extends GenericForms implements Htmlable
 {
-    use HasExstractPublicMethods;
+    use HasExtractPublicMethods;
 
     public function __construct(
         protected ?string $name

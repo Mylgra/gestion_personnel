@@ -3,7 +3,8 @@
 namespace App\Livewire\Domains\Agents;
 
 use App\Models\Person;
-use App\View\TallFlex\Forms\FormBuilder;
+use App\View\TallFlex\Component\Section;
+use App\View\TallFlex\Forms\Forms;
 use App\View\TallFlex\Forms\Inputs\SelectInput;
 use Illuminate\View\View;
 use Livewire\Attributes\Layout;
@@ -29,12 +30,17 @@ class CreateAgent extends Component
 
     public function component()
     {
-        return FormBuilder::make()
+        return Forms::make()
             ->schema([
-                SelectInput::make('agent_type')
-                    ->label('Agent Type')
-                    ->options(Person::all()->pluck('name', 'id')->toArray())
-                    ->required(),
+                Section::make('Agent Information')
+                    ->schema([
+                        SelectInput::make('person_id')
+                            ->label('Person')
+                            ->searchable()
+                            ->options(Person::pluck('name', 'id')->toArray())
+                            ->required(),
+                    ])
+                    ->column(2)
             ]);
     }
 }

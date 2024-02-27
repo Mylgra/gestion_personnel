@@ -5,13 +5,13 @@ namespace App\View\TallFlex\Forms\Inputs;
 use App\View\TallFlex\Contracts\HasEvaluated;
 use App\View\TallFlex\Contracts\HasLabel;
 use App\View\TallFlex\Contracts\HasRequired;
-use App\View\TallFlex\Forms\GenerateForms;
+use App\View\TallFlex\Forms\GenericForms;
 use Closure;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\View\View;
 use Throwable;
 
-class FileUpload extends GenerateForms implements Htmlable
+class FileUpload extends GenericForms implements Htmlable
 {
     use HasEvaluated;
     use HasLabel;

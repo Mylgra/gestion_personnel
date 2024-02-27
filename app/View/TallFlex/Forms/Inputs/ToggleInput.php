@@ -6,12 +6,12 @@ use App\View\TallFlex\Contracts\HasChecked;
 use App\View\TallFlex\Contracts\HasEvaluated;
 use App\View\TallFlex\Contracts\HasLabel;
 use App\View\TallFlex\Contracts\HasRequired;
-use App\View\TallFlex\Forms\GenerateForms;
+use App\View\TallFlex\Forms\GenericForms;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\View\View;
 use Throwable;
 
-class ToggleInput extends GenerateForms implements Htmlable
+class ToggleInput extends GenericForms implements Htmlable
 {
     use HasEvaluated;
     use HasLabel;

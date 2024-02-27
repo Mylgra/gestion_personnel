@@ -7,12 +7,12 @@ use App\View\TallFlex\Contracts\HasFormat;
 use App\View\TallFlex\Contracts\HasLabel;
 use App\View\TallFlex\Contracts\HasPlaceholder;
 use App\View\TallFlex\Contracts\HasRequired;
-use App\View\TallFlex\Forms\GenerateForms;
+use App\View\TallFlex\Forms\GenericForms;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\View\View;
 use Throwable;
 
-class TimePicker extends GenerateForms implements Htmlable
+class TimePicker extends GenericForms implements Htmlable
 {
     use HasEvaluated;
     use HasLabel;

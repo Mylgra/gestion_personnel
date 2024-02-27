@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\View\TallFlex\Forms;
+namespace App\View\TallFlex\Contracts;
 
 use ReflectionClass;
 use ReflectionMethod;
 
-trait HasExstractPublicMethods
+trait HasExtractPublicMethods
 {
     protected function extractPublicMethods(): array
     {

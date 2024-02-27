@@ -1,15 +1,18 @@
 <?php
 
-namespace App\View\TallFlex\Forms;
+namespace App\View\TallFlex\Component;
 
+use App\View\TallFlex\Contracts\HasExtractPublicMethods;
+use App\View\TallFlex\Forms\GenericForms;
 use Closure;
 use Illuminate\Contracts\Support\Htmlable;
+use Illuminate\View\Component;
 use Illuminate\View\View;
 use InvalidArgumentException;
 
-class FormSection extends GenerateForms implements Htmlable
+class Section extends Component implements Htmlable
 {
-    use HasExstractPublicMethods;
+    use HasExtractPublicMethods;
 
     protected array $schema = [];
 
@@ -42,7 +45,7 @@ class FormSection extends GenerateForms implements Htmlable
     public function schema(array $schema): static
     {
         $this->schema = array_map(function ($schema) {
-            if ($schema instanceof GenerateForms) {
+            if ($schema instanceof GenericForms || $schema instanceof Component) {
                 return $schema;
             }
             throw new InvalidArgumentException('Invalid must be instance of GenerateForms.');

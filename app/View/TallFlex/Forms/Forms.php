@@ -7,14 +7,13 @@ namespace App\View\TallFlex\Forms;
 use Closure;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Support\Facades\Route;
+use Illuminate\View\Component;
 use Illuminate\View\View;
 use InvalidArgumentException;
 use Throwable;
 
-class FormBuilder extends GenerateForms implements Htmlable
+class Forms extends GenericForms implements Htmlable
 {
-    use HasExstractPublicMethods;
-
     protected array $schema = [];
 
     protected string|null $route = null;
@@ -22,7 +21,7 @@ class FormBuilder extends GenerateForms implements Htmlable
     protected int|Closure|null $column = 0;
 
     public function __construct(
-        protected ?string $name = null
+        protected ?string $name
     )
     {
     }
@@ -35,7 +34,7 @@ class FormBuilder extends GenerateForms implements Htmlable
     public function schema(array $schema): static
     {
         $this->schema = array_map(function ($schema) {
-            if ($schema instanceof GenerateForms) {
+            if ($schema instanceof GenericForms || $schema instanceof Component) {
                 return $schema;
             }
             throw new InvalidArgumentException('Invalid must be instance of GenerateForms.');

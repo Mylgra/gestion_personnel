@@ -2,8 +2,8 @@
 
 namespace App\View\TallFlex\Menus;
 
-use App\View\TallFlex\Forms\GenerateForms;
-use App\View\TallFlex\Forms\HasExstractPublicMethods;
+use App\View\TallFlex\Contracts\HasExtractPublicMethods;
+use App\View\TallFlex\Forms\GenericForms;
 use Closure;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Contracts\View\View;
@@ -14,7 +14,7 @@ use Throwable;
 
 class Header extends Component implements Htmlable
 {
-    use HasExstractPublicMethods;
+    use HasExtractPublicMethods;
 
     protected bool $notification = false;
 
@@ -97,7 +97,7 @@ class Header extends Component implements Htmlable
     public function items(array $items): static
     {
         $this->items = array_map(function ($item) {
-            if ($item instanceof GenerateForms) {
+            if ($item instanceof GenericForms) {
                 return $item;
             }
             throw new InvalidArgumentException('Invalid must be instance of Link.');

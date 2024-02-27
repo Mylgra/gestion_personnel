@@ -8,11 +8,15 @@
 
 <div>
     <div class="card">
-        <div class="card-header card-stretch">
-            <h5 class="card-title">{{ $title }}</h5>
-        </div>
+        @if($title)
+            <div class="card-header card-stretch">
+                <h5 class="card-title">{{ $title }}</h5>
+            </div>
+        @endif
         <div class="card-inner">
-            <p class="card-description">{{ $description }}</p>
+            @if($description)
+                <p class="card-description">{{ $description }}</p>
+            @endif
             <div class="row g-4">
                 @foreach($schemas as $index => $schema)
                     <div class="{{ $class }}">
