@@ -5,12 +5,13 @@ namespace App\View\TallFlex\Forms\Inputs;
 use App\View\TallFlex\Contracts\HasEvaluated;
 use App\View\TallFlex\Contracts\HasLabel;
 use App\View\TallFlex\Contracts\HasPlaceholder;
+use App\View\TallFlex\Forms\GenericForms;
 use Closure;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\View\View;
 use Throwable;
 
-class TextEditor extends Forms implements Htmlable
+class TextEditor extends GenericForms implements Htmlable
 {
     use HasEvaluated;
     use HasLabel;
