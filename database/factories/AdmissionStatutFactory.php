@@ -17,7 +17,8 @@ class AdmissionStatutFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'date' => fake()->date,
+            'document' => fake()->name,
         ];
     }
 }

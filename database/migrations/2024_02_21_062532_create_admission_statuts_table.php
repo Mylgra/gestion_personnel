@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('admission_statuts', function (Blueprint $table) {
             $table->id();
+            $table->date('date');
+            $table->string('document')->nullable();
             $table->timestamps();
         });
     }

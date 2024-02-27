@@ -7,5 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class AdmissionStatut extends Model
 {
-    use HasFactory;
+    protected $fillable = [
+        'date',
+        'document'
+    ];
 }

@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             GradeSeeder::class,
             ServiceSeeder::class,
             TransferSeeder::class,
+            AdmissionStatutSeeder::class,
         ]);
     }
 }
