@@ -34,23 +34,23 @@ class ColorPicker extends GenerateForms implements Htmlable
         return new static($name);
     }
 
-    public function getWidth(): int|Closure|null
+    public function getWidth(): ?int
     {
         return $this->evaluate($this->width);
     }
 
-    public function width(int|Closure|null $width = 100): ColorPicker
+    public function width(int|Closure|null $width): ColorPicker
     {
         $this->width = $width;
         return $this;
     }
 
-    public function getName(): int|Closure|string|null
+    public function getName(): ?string
     {
         return $this->evaluate($this->name);
     }
 
-    public function getType(): string|Closure|null
+    public function getType(): ?string
     {
         return $this->evaluate($this->type);
     }

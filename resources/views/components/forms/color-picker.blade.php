@@ -9,10 +9,10 @@
     x-data="{
         initColorPicker() {
             this.colorPicker = new iro.ColorPicker(this.$refs.input, {
-                width: {{ $width }},
+                @if($width) width: {{ $width }}, @endif
                 color: '#f00',
             });
-            this.colorPicker.on('input:end', (color) => {
+            this.colorPicker.on('color:change', (color) => {
                 this.$refs.input.value = color.{{$type}}String;
                 this.$refs.input.dispatchEvent(new Event('input'));
             });
