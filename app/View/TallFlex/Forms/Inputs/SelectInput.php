@@ -2,35 +2,35 @@
 
 namespace App\View\TallFlex\Forms\Inputs;
 
+use App\View\TallFlex\Contracts\HasDisabled;
+use App\View\TallFlex\Contracts\HasEvaluated;
 use App\View\TallFlex\Contracts\HasLabel;
 use App\View\TallFlex\Contracts\HasPlaceholder;
 use App\View\TallFlex\Contracts\HasRequired;
 use App\View\TallFlex\Contracts\HasRule;
 use App\View\TallFlex\Forms\GenerateForms;
-use Closure;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\View\View;
-use Livewire\Component;
 use Throwable;
 
 class SelectInput extends GenerateForms implements Htmlable
 {
+    use HasEvaluated;
     use HasLabel;
     use HasPlaceholder;
     use HasRequired;
     use HasRule;
+    use HasDisabled;
 
     public bool $native = true;
     protected array|Collection $options = [];
     protected bool $searchable = false;
     protected bool $multiple = false;
-    protected Component $livewire;
     protected bool $autofocus = false;
     protected bool $autocomplete = false;
     protected string $autocapitalize = 'off';
-    protected bool $disabled = false;
     protected string $uniqueId;
 
     public function __construct(
@@ -48,16 +48,6 @@ class SelectInput extends GenerateForms implements Htmlable
     public function getUniqueId(): string
     {
         return $this->evaluate($this->uniqueId);
-    }
-
-    public function evaluate(mixed $value)
-    {
-        if ($value instanceof Closure) {
-            return app()->call($value, [
-                'state' => $this->livewire->{$this->getName()},
-            ]);
-        }
-        return $value;
     }
 
     public function getName(): string
@@ -164,17 +154,5 @@ class SelectInput extends GenerateForms implements Htmlable
     public function getAutocapitalize(): string
     {
         return $this->evaluate($this->autocapitalize);
-    }
-
-    public function disabled(bool $disabled = true): static
-    {
-        $this->disabled = $disabled;
-
-        return $this;
-    }
-
-    public function getDisabled(): bool
-    {
-        return $this->evaluate($this->disabled);
     }
 }

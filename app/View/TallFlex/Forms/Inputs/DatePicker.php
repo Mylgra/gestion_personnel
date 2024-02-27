@@ -2,26 +2,24 @@
 
 namespace App\View\TallFlex\Forms\Inputs;
 
+use App\View\TallFlex\Contracts\HasEvaluated;
 use App\View\TallFlex\Contracts\HasFormat;
 use App\View\TallFlex\Contracts\HasLabel;
 use App\View\TallFlex\Contracts\HasPlaceholder;
 use App\View\TallFlex\Contracts\HasRequired;
 use App\View\TallFlex\Forms\GenerateForms;
-use Closure;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\View\View;
-use Livewire\Component;
 use Override;
 use Throwable;
 
 class DatePicker extends GenerateForms implements Htmlable
 {
+    use HasEvaluated;
     use HasLabel;
     use HasPlaceholder;
     use hasRequired;
     use HasFormat;
-
-    protected Component $livewire;
 
     protected string|null $minDate = null;
 
@@ -49,16 +47,6 @@ class DatePicker extends GenerateForms implements Htmlable
     public function getName(): string
     {
         return $this->evaluate($this->name);
-    }
-
-    public function evaluate(mixed $value)
-    {
-        if ($value instanceof Closure) {
-            return app()->call($value, [
-                'state' => $this->livewire->{$this->getName()},
-            ]);
-        }
-        return $value;
     }
 
     public function minDate(string $minDate): self

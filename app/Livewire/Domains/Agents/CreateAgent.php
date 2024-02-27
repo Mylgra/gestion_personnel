@@ -3,7 +3,7 @@
 namespace App\Livewire\Domains\Agents;
 
 use App\View\TallFlex\Forms\FormBuilder;
-use App\View\TallFlex\Forms\Inputs\TextEditor;
+use App\View\TallFlex\Forms\Inputs\Textarea;
 use Illuminate\View\View;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
@@ -14,7 +14,7 @@ class CreateAgent extends Component
 {
     use WithFileUploads;
 
-    public string $profile = '';
+    public string $description = '';
 
     public function render(): View
     {
@@ -30,9 +30,11 @@ class CreateAgent extends Component
     {
         return FormBuilder::make()
             ->schema([
-                TextEditor::make('profile')
-                    ->label('Bio')
-                    ->placeholder('Enter your bio here'),
+                Textarea::make('description')
+                    ->label('Description')
+                    ->placeholder('Enter your description')
+                    ->autosize()
+                    ->required(),
             ]);
     }
 }

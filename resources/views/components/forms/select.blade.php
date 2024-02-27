@@ -27,7 +27,7 @@
             name="{{ $name }}"
             @if($autofocus) autofocus @endif
             autocomplete="{{ $getAutocomplete() ? 'on' : 'off' }}"
-            @if($getDisabled()) disabled @endif
+            @if($isDisabled()) disabled @endif
         >
             <option disabled>{{ $placeholder }}</option>
             @foreach($options as $key => $value)

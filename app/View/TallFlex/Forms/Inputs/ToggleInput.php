@@ -3,24 +3,22 @@
 namespace App\View\TallFlex\Forms\Inputs;
 
 use App\View\TallFlex\Contracts\HasChecked;
+use App\View\TallFlex\Contracts\HasEvaluated;
 use App\View\TallFlex\Contracts\HasLabel;
 use App\View\TallFlex\Contracts\HasRequired;
 use App\View\TallFlex\Forms\GenerateForms;
-use Closure;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\View\View;
-use Livewire\Component;
 use Throwable;
 
 class ToggleInput extends GenerateForms implements Htmlable
 {
+    use HasEvaluated;
     use HasLabel;
     use HasChecked;
     use HasRequired;
 
     protected string $uniqueId;
-
-    protected Component $livewire;
 
     public function __construct(
         public string $name,
@@ -37,16 +35,6 @@ class ToggleInput extends GenerateForms implements Htmlable
     public function getName(): string
     {
         return $this->evaluate($this->name);
-    }
-
-    public function evaluate(mixed $value)
-    {
-        if ($value instanceof Closure) {
-            return app()->call($value, [
-                'state' => $this->livewire->{$this->getName()},
-            ]);
-        }
-        return $value;
     }
 
     public function getUniqueId(): string

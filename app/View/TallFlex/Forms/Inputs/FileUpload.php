@@ -2,21 +2,20 @@
 
 namespace App\View\TallFlex\Forms\Inputs;
 
+use App\View\TallFlex\Contracts\HasEvaluated;
 use App\View\TallFlex\Contracts\HasLabel;
 use App\View\TallFlex\Contracts\HasRequired;
 use App\View\TallFlex\Forms\GenerateForms;
 use Closure;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\View\View;
-use Livewire\Component;
 use Throwable;
 
 class FileUpload extends GenerateForms implements Htmlable
 {
+    use HasEvaluated;
     use HasLabel;
     use HasRequired;
-
-    protected Component $livewire;
 
     protected string $directory = 'public';
 
@@ -97,16 +96,6 @@ class FileUpload extends GenerateForms implements Htmlable
     public function isAllowFileTypeValidation(): bool
     {
         return (bool)$this->evaluate($this->allowFileTypeValidation);
-    }
-
-    public function evaluate(mixed $value)
-    {
-        if ($value instanceof Closure) {
-            return app()->call($value, [
-                'state' => $this->livewire->{$this->getName()},
-            ]);
-        }
-        return $value;
     }
 
     public function getName(): string

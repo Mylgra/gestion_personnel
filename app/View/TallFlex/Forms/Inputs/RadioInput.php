@@ -3,22 +3,20 @@
 namespace App\View\TallFlex\Forms\Inputs;
 
 use App\View\TallFlex\Contracts\HasChecked;
+use App\View\TallFlex\Contracts\HasEvaluated;
 use App\View\TallFlex\Contracts\HasLabel;
 use App\View\TallFlex\Contracts\HasRequired;
 use App\View\TallFlex\Forms\GenerateForms;
-use Closure;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\View\View;
-use Livewire\Component;
 use Throwable;
 
 class RadioInput extends GenerateForms implements Htmlable
 {
+    use HasEvaluated;
     use HasLabel;
     use HasRequired;
     use HasChecked;
-
-    protected Component $livewire;
 
     protected array $options = [];
 
@@ -44,16 +42,6 @@ class RadioInput extends GenerateForms implements Htmlable
     public function isInline(): bool
     {
         return $this->evaluate($this->inline);
-    }
-
-    public function evaluate(mixed $value)
-    {
-        if ($value instanceof Closure) {
-            return app()->call($value, [
-                'state' => $this->livewire->{$this->getName()},
-            ]);
-        }
-        return $value;
     }
 
     public function getName()

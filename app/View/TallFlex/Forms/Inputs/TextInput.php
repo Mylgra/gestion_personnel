@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\View\TallFlex\Forms\Inputs;
 
+use App\View\TallFlex\Contracts\HasDisabled;
+use App\View\TallFlex\Contracts\HasEvaluated;
 use App\View\TallFlex\Contracts\HasLabel;
 use App\View\TallFlex\Contracts\HasPlaceholder;
 use App\View\TallFlex\Contracts\HasRequired;
@@ -16,19 +18,17 @@ use Throwable;
 
 class TextInput extends GenerateForms implements Htmlable
 {
+    use HasEvaluated;
     use HasPlaceholder;
     use HasRequired;
     use HasLabel;
-
-    protected Component $livewire;
+    use HasDisabled;
 
     protected string|Closure|null $type = "text";
 
     protected bool $required = true;
 
     protected int|Closure|null $minimum = null;
-
-    protected Closure|bool $disabled = false;
 
     protected Closure|bool $autofocus = true;
     protected mixed $maxValue = null;
@@ -56,16 +56,6 @@ class TextInput extends GenerateForms implements Htmlable
     public function getUniqueId(): string
     {
         return $this->evaluate($this->uniqueId);
-    }
-
-    public function evaluate(mixed $value)
-    {
-        if ($value instanceof Closure) {
-            return app()->call($value, [
-                'state' => $this->livewire->{$this->getName()},
-            ]);
-        }
-        return $value;
     }
 
     public function getName(): string
@@ -117,13 +107,6 @@ class TextInput extends GenerateForms implements Htmlable
         return $this->evaluate($this->minimum) ?? null;
     }
 
-    public function disabled(bool|Closure $disabled): static
-    {
-        $this->disabled = $disabled;
-
-        return $this;
-    }
-
     public function autofocus(bool|Closure $autofocus = true): static
     {
         $this->autofocus = $autofocus;
@@ -134,11 +117,6 @@ class TextInput extends GenerateForms implements Htmlable
     public function getAutofocus(): bool
     {
         return (bool)$this->evaluate($this->autofocus);
-    }
-
-    public function isDisabled(): bool
-    {
-        return (bool)$this->evaluate($this->disabled);
     }
 
     public function maxLength(int $maximum): static
