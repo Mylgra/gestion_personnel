@@ -2,8 +2,9 @@
 
 namespace App\Livewire\Domains\Agents;
 
+use App\Models\Person;
 use App\View\TallFlex\Forms\FormBuilder;
-use App\View\TallFlex\Forms\Inputs\ColorPicker;
+use App\View\TallFlex\Forms\Inputs\SelectInput;
 use Illuminate\View\View;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
@@ -30,9 +31,10 @@ class CreateAgent extends Component
     {
         return FormBuilder::make()
             ->schema([
-                ColorPicker::make('color')
-                    ->width(100)
-                    ->type('rgb'),
+                SelectInput::make('agent_type')
+                    ->label('Agent Type')
+                    ->options(Person::all()->pluck('name', 'id')->toArray())
+                    ->required(),
             ]);
     }
 }
