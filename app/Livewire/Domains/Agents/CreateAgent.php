@@ -3,7 +3,7 @@
 namespace App\Livewire\Domains\Agents;
 
 use App\View\TallFlex\Forms\FormBuilder;
-use App\View\TallFlex\Forms\Inputs\FileUpload;
+use App\View\TallFlex\Forms\Inputs\TextEditor;
 use Illuminate\View\View;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
@@ -14,7 +14,7 @@ class CreateAgent extends Component
 {
     use WithFileUploads;
 
-    public array $profile = [];
+    public string $profile = '';
 
     public function render(): View
     {
@@ -30,14 +30,9 @@ class CreateAgent extends Component
     {
         return FormBuilder::make()
             ->schema([
-                FileUpload::make('profile')
-                    ->directory('public')
-                    ->reorder()
-                    ->maxFileSize('3MB')
-                    ->required()
-                    ->allowImagePreview()
-                    ->allowImageCrop()
-            ])
-            ->column(2);
+                TextEditor::make('profile')
+                    ->label('Bio')
+                    ->placeholder('Enter your bio here'),
+            ]);
     }
 }
