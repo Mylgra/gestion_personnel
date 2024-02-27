@@ -3,7 +3,7 @@
 namespace App\Livewire\Domains\Agents;
 
 use App\View\TallFlex\Forms\FormBuilder;
-use App\View\TallFlex\Forms\Inputs\Textarea;
+use App\View\TallFlex\Forms\Inputs\ColorPicker;
 use Illuminate\View\View;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
@@ -14,7 +14,7 @@ class CreateAgent extends Component
 {
     use WithFileUploads;
 
-    public string $description = '';
+    public string $color;
 
     public function render(): View
     {
@@ -30,11 +30,9 @@ class CreateAgent extends Component
     {
         return FormBuilder::make()
             ->schema([
-                Textarea::make('description')
-                    ->label('Description')
-                    ->placeholder('Enter your description')
-                    ->autosize()
-                    ->required(),
+                ColorPicker::make('color')
+                    ->width(100)
+                    ->type('rgb'),
             ]);
     }
 }

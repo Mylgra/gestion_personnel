@@ -9,6 +9,7 @@
     $placeholder = $getPlaceholder();
     $autofocus = $getAutofocus();
     $uniqueId = $getUniqueId();
+    $live = $getLive();
 @endphp
 
 <div class="form-group" wire:key="{{$uniqueId }}">
@@ -21,7 +22,7 @@
             @if($searchable) data-search="on" @endif
             @if($multiple) multiple="multiple" @endif
             @if($placeholder)data-placeholder="{{ $placeholder }}" @endif
-            wire:model.live="{{ $name }}"
+            @if($live) wire:model.live="{{ $name }}" @else wire:model="{{ $name }}" @endif
             wire:change="{{ $name }}"
             id="{{ $uniqueId  }}"
             name="{{ $name }}"

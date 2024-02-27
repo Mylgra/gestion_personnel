@@ -5,7 +5,6 @@ namespace App\View\TallFlex\Forms\Inputs;
 use App\View\TallFlex\Contracts\HasEvaluated;
 use App\View\TallFlex\Contracts\HasLabel;
 use App\View\TallFlex\Contracts\HasPlaceholder;
-use App\View\TallFlex\Contracts\HasRequired;
 use App\View\TallFlex\Forms\GenerateForms;
 use Closure;
 use Illuminate\Contracts\Support\Htmlable;
@@ -16,7 +15,6 @@ class ColorPicker extends GenerateForms implements Htmlable
 {
     use HasEvaluated;
     use HasLabel;
-    use HasRequired;
     use HasPlaceholder;
 
     protected string|Closure|null $type = null;
@@ -31,7 +29,7 @@ class ColorPicker extends GenerateForms implements Htmlable
 
     public static function make(string $name): static
     {
-        return new static($name);
+        return app(static::class, ['name' => $name]);
     }
 
     public function getWidth(): ?int
