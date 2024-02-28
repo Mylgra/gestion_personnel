@@ -5,6 +5,7 @@ namespace App\View\TallFlex\Tables\Fields;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\View\View;
 use Livewire\Component;
+use Throwable;
 
 class TextColumn extends Component implements Htmlable
 {
@@ -19,6 +20,9 @@ class TextColumn extends Component implements Htmlable
         return new static($name);
     }
 
+    /**
+     * @throws Throwable
+     */
     public function toHtml(): string
     {
         return $this->render()->render();
@@ -28,6 +32,6 @@ class TextColumn extends Component implements Htmlable
     {
         return view('');
     }
-    
+
 
 }

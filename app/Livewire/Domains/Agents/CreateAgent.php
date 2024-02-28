@@ -2,10 +2,9 @@
 
 namespace App\Livewire\Domains\Agents;
 
-use App\Models\Person;
-use App\View\TallFlex\Component\Section;
 use App\View\TallFlex\Forms\Forms;
-use App\View\TallFlex\Forms\Inputs\SelectInput;
+use App\View\TallFlex\Forms\Inputs\Dropzone;
+use App\View\TallFlex\Forms\Inputs\ToggleButton;
 use Illuminate\View\View;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
@@ -16,7 +15,7 @@ class CreateAgent extends Component
 {
     use WithFileUploads;
 
-    public string $color;
+    public array $name = [];
 
     public function render(): View
     {
@@ -32,15 +31,23 @@ class CreateAgent extends Component
     {
         return Forms::make()
             ->schema([
-                Section::make('Agent Information')
-                    ->schema([
-                        SelectInput::make('person_id')
-                            ->label('Person')
-                            ->searchable()
-                            ->options(Person::pluck('name', 'id')->toArray())
-                            ->required(),
+                ToggleButton::make('name')
+                    ->description('Name of the agent')
+                    ->label('Name')
+                    // ->mode('control')
+                    //->multiple()
+                    ->options([
+                        'Laravel',
+                        'Tailwindcss',
+                        'Livewire',
+                        'AlpineJs'
                     ])
-                    ->column(2)
+//                    ->icons([
+//                        'Laravel' => 'user',
+//                        'Tailwindcss' => 'loader',
+//                        'Livewire' => 'signal',
+//                        'AlpineJs' => 'wifi-off'
+//                    ])
             ]);
     }
 }

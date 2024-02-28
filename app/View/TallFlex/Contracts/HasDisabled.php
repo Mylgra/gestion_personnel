@@ -16,6 +16,7 @@ trait HasDisabled
     public function disabled(bool $disabled = true): Textarea
     {
         $this->disabled = $disabled;
+        
         return $this;
     }
 }
