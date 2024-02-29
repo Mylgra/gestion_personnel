@@ -2,7 +2,10 @@
     $schemas = $getSchema();
     $route = $getRoute();
     $columns = $getColumn();
-    $class = $columns == 2 ? 'col-lg-6 col-md-6 col-sm-12' : ($columns == 3 ? 'col-lg-4 col-md-4 col-sm-12' : '');
+    $class = $columns == 2 ?
+        'col-lg-6 col-md-6 col-sm-12' :
+        ($columns == 3 ? 'col-lg-4 col-md-4 col-sm-12' :
+        ($columns == 4 ? 'col-lg-3 col-md-3 col-sm-12' : 'col-sm-12'));
 @endphp
 <div class="nk-block nk-block-lg">
     <div class="card">

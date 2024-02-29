@@ -6,7 +6,7 @@ use Closure;
 
 trait HasRequired
 {
-    protected bool $required = true;
+    protected bool|Closure $required = false;
 
 
     public function required(bool|Closure $condition = true): self

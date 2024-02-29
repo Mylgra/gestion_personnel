@@ -26,8 +26,6 @@ class TextInput extends GenericForms implements Htmlable
 
     protected string|Closure|null $type = "text";
 
-    protected bool $required = true;
-
     protected int|Closure|null $minimum = null;
 
     protected Closure|bool $autofocus = true;
@@ -39,7 +37,12 @@ class TextInput extends GenericForms implements Htmlable
     protected bool|Closure $isReadOnly = false;
 
     protected bool $autocomplete = false;
+
     protected string $uniqueId;
+
+    protected string|Closure|null $prefix = null;
+
+    protected string|Closure|null $position = null;
 
     public function __construct(
         protected string $name,
@@ -63,7 +66,7 @@ class TextInput extends GenericForms implements Htmlable
         return $this->evaluate($this->name);
     }
 
-    public function livewire(Component $livewire): static
+    public function livewire(Component|Closure $livewire): static
     {
         $this->livewire = $livewire;
 
@@ -181,7 +184,7 @@ class TextInput extends GenericForms implements Htmlable
 
     public function getHelpText(): string|Closure|null
     {
-        return $this->helpText;
+        return $this->evaluate($this->helpText);
     }
 
     public function email(): static
@@ -217,5 +220,29 @@ class TextInput extends GenericForms implements Htmlable
         $this->type = 'url';
 
         return $this;
+    }
+
+    public function prefix(string|Closure|null $prefix): static
+    {
+        $this->prefix = $prefix;
+
+        return $this;
+    }
+
+    public function getPrefix(): ?string
+    {
+        return $this->evaluate($this->prefix);
+    }
+
+    public function position(string|Closure|null $position = 'left'): static
+    {
+        $this->position = $position;
+
+        return $this;
+    }
+
+    public function getPosition(): ?string
+    {
+        return $this->evaluate($this->position);
     }
 }

@@ -2,7 +2,7 @@
     $label = $getLabel();
     $name = $getName();
     $startRange = $getMinDate();
-    $endRandge = $getMaxDate();
+    $endRange = $getMaxDate();
 @endphp
 <div
     class="form-group"
