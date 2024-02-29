@@ -1,19 +1,17 @@
 @php
     $route = $getRoute();
-    $image = $getLogo();
     $items = $getItems();
-    $theme = $getTheme();
     $icon = $getIcon();
     $name = $getName();
 @endphp
 
-<div class="nk-sidebar nk-sidebar-fixed is-{{ $theme ?? 'white' }} " data-content="sidebarMenu">
+<div class="nk-sidebar nk-sidebar-fixed is-{{ $getTheme() ?? 'white' }} " data-content="sidebarMenu">
     <div class="nk-sidebar-element nk-sidebar-head">
         <div class="nk-sidebar-brand">
             <a href="{{ $route }}" class="logo-link nk-sidebar-logo" wire:navigate>
-                <img class="logo-light logo-img" src="{{ $image }}" srcset="{{ $image }} 2x" alt="{{ $name }}">
-                <img class="logo-dark logo-img" src="{{ $image }}" srcset="{{ $image }} 2x" alt="{{ $name }}">
-                <img class="logo-small logo-img logo-img-small" src="{{ $image }}" srcset="{{ $image }} 2x"
+                <img class="logo-light logo-img" src="{{ $getLogo() }}" srcset="{{ $getLogo() }} 2x" alt="{{ $name }}">
+                <img class="logo-dark logo-img" src="{{ $getLogo() }}" srcset="{{ $getLogo() }} 2x" alt="{{ $name }}">
+                <img class="logo-small logo-img logo-img-small" src="{{ $getLogo() }}" srcset="{{ $getLogo() }} 2x"
                      alt="{{ $name }}">
             </a>
         </div>
