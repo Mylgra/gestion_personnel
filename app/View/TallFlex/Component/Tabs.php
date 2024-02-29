@@ -17,6 +17,7 @@ class Tabs extends Component implements Htmlable
     use HasEvaluated;
 
     protected Closure|array|null $schema = [];
+    protected Closure|string|null $alignment = null;
 
     public function __construct(
         protected string $name
@@ -59,5 +60,17 @@ class Tabs extends Component implements Htmlable
     public function getSchemas(): array
     {
         return $this->evaluate($this->schema);
+    }
+
+    public function alignment(string|Closure|null $alignment = 'horizontal'): static
+    {
+        $this->alignment = $alignment;
+
+        return $this;
+    }
+
+    public function getAlignment()
+    {
+        return $this->evaluate($this->alignment);
     }
 }
