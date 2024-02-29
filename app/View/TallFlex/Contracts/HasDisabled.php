@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\View\TallFlex\Contracts;
 
 use App\View\TallFlex\Forms\Inputs\Textarea;
@@ -16,7 +18,7 @@ trait HasDisabled
     public function disabled(bool $disabled = true): Textarea
     {
         $this->disabled = $disabled;
-        
+
         return $this;
     }
 }

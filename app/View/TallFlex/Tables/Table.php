@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\View\TallFlex\Tables;
 
 use Illuminate\Database\Eloquent\Builder;
@@ -11,7 +13,7 @@ abstract class Table extends Component
 {
     use WithPagination;
 
-    public abstract function columns(array $columns): array;
+    abstract public function columns(array $columns): array;
 
     public function data(): Collection|array
     {
@@ -20,5 +22,5 @@ abstract class Table extends Component
             ->get();
     }
 
-    public abstract function query(): Builder;
+    abstract public function query(): Builder;
 }

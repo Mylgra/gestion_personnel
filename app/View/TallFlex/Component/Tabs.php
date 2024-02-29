@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\View\TallFlex\Component;
 
 use App\View\TallFlex\Contracts\HasEvaluated;
@@ -13,16 +15,15 @@ use Throwable;
 
 class Tabs extends Component implements Htmlable
 {
-    use HasExtractPublicMethods;
     use HasEvaluated;
+    use HasExtractPublicMethods;
 
     protected Closure|array|null $schema = [];
     protected Closure|string|null $alignment = null;
 
     public function __construct(
         protected string $name
-    )
-    {
+    ) {
     }
 
     public static function make(string|null $name = '')

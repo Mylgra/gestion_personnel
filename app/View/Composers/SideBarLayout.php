@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\View\Composers;
 
 use App\View\TallFlex\Menus\Links\LinkItems;
@@ -10,7 +12,7 @@ class SideBarLayout
 {
     public function compose(View $view): void
     {
-        $sidebar = Sidebar::make('Dashboard')
+        $sidebar = Sidebar::make()
             ->logo('images/profile.jpg')
             ->theme('light')
             ->route('home')

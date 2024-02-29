@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\View\TallFlex\Forms\Inputs;
 
 use App\View\TallFlex\Contracts\HasEvaluated;
@@ -23,8 +25,8 @@ use Throwable;
  */
 class ToggleButton extends GenericForms implements Htmlable
 {
-    use HasExtractPublicMethods;
     use HasEvaluated;
+    use HasExtractPublicMethods;
     use HasLabel;
     use HasRequired;
 
@@ -41,8 +43,7 @@ class ToggleButton extends GenericForms implements Htmlable
 
     public function __construct(
         protected string $name
-    )
-    {
+    ) {
     }
 
     public static function make(string $name): static

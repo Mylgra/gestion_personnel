@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\View\TallFlex\Forms\Inputs;
 
 use App\View\TallFlex\Contracts\HasChecked;
@@ -13,10 +15,10 @@ use Throwable;
 
 class RadioInput extends GenericForms implements Htmlable
 {
+    use HasChecked;
     use HasEvaluated;
     use HasLabel;
     use HasRequired;
-    use HasChecked;
 
     protected array $options = [];
 
@@ -24,8 +26,7 @@ class RadioInput extends GenericForms implements Htmlable
 
     public function __construct(
         public string $name
-    )
-    {
+    ) {
     }
 
     public static function make(string $name): static

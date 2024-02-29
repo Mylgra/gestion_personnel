@@ -1,17 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Models\Agent;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class () extends Migration {
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::table('agents', function (Blueprint $table) {
+        Schema::table('agents', function (Blueprint $table): void {
             $table->foreignIdFor(Agent::class)
                 ->constrained()
                 ->cascadeOnDelete();
@@ -23,7 +25,7 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('agents', function (Blueprint $table) {
+        Schema::table('agents', function (Blueprint $table): void {
             $table->dropForeignIdFor(Agent::class);
         });
     }

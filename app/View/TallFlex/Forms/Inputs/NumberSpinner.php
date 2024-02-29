@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\View\TallFlex\Forms\Inputs;
 
 use App\View\TallFlex\Contracts\HasEvaluated;
@@ -16,8 +18,8 @@ class NumberSpinner extends GenericForms implements Htmlable
 {
     use HasEvaluated;
     use HasLabel;
-    use HasRequired;
     use HasPlaceholder;
+    use HasRequired;
 
     protected int|Closure|null $step = null;
 
@@ -29,9 +31,8 @@ class NumberSpinner extends GenericForms implements Htmlable
 
     public function __construct(
         public string $name
-    )
-    {
-        $this->uniqueId = uniqid('input-' . $this->name, true);
+    ) {
+        $this->uniqueId = uniqid('input-'.$this->name, true);
     }
 
     public static function make(string $name): static

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\View\TallFlex\Forms\Inputs;
 
 use App\View\TallFlex\Contracts\HasChecked;
@@ -13,18 +15,17 @@ use Throwable;
 
 class ToggleInput extends GenericForms implements Htmlable
 {
+    use HasChecked;
     use HasEvaluated;
     use HasLabel;
-    use HasChecked;
     use HasRequired;
 
     protected string $uniqueId;
 
     public function __construct(
         public string $name,
-    )
-    {
-        $this->uniqueId = uniqid('toggle-' . $this->name, true);
+    ) {
+        $this->uniqueId = uniqid('toggle-'.$this->name, true);
     }
 
     public static function make(string $name): self

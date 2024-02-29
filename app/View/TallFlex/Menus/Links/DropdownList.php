@@ -1,21 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\View\TallFlex\Menus\Links;
 
 use App\View\TallFlex\Contracts\HasExtractPublicMethods;
-use App\View\TallFlex\Forms\GenericForms;
 use Illuminate\Contracts\Support\Htmlable;
+use Illuminate\View\Component;
 use Illuminate\View\View;
 use Throwable;
 
-class DropdownList extends GenericForms implements Htmlable
+class DropdownList extends Component implements Htmlable
 {
     use HasExtractPublicMethods;
 
     public function __construct(
         protected ?string $name
-    )
-    {
+    ) {
     }
 
     public static function make(?string $name): static

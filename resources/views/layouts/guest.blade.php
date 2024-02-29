@@ -15,10 +15,8 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    @persist('scripts')
     <script src="{{ asset('assets/js/bundle.js') }}"></script>
     <script src="{{ asset('assets/js/scripts.js') }}"></script>
-    @endpersist
     @stack('styles')
 </head>
 <body class="nk-body bg-lighter npc-default has-sidebar ui-bordered">

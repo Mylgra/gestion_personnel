@@ -18,11 +18,11 @@ use Throwable;
 
 class TextInput extends GenericForms implements Htmlable
 {
+    use HasDisabled;
     use HasEvaluated;
+    use HasLabel;
     use HasPlaceholder;
     use HasRequired;
-    use HasLabel;
-    use HasDisabled;
 
     protected string|Closure|null $type = "text";
 
@@ -46,9 +46,8 @@ class TextInput extends GenericForms implements Htmlable
 
     public function __construct(
         protected string $name,
-    )
-    {
-        $this->uniqueId = uniqid('input-' . $this->name, true);
+    ) {
+        $this->uniqueId = uniqid('input-'.$this->name, true);
     }
 
     public static function make(string $name): static

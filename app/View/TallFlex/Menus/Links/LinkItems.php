@@ -1,17 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\View\TallFlex\Menus\Links;
 
 use Closure;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Support\Facades\Route;
+use Illuminate\View\Component;
 use Illuminate\View\View;
 use InvalidArgumentException;
-use ReflectionClass;
-use ReflectionMethod;
 use Throwable;
 
-class LinkItems implements Htmlable
+class LinkItems extends Component implements Htmlable
 {
     public string|Closure|null $icon = null;
     public string|null $active = null;
@@ -20,8 +21,7 @@ class LinkItems implements Htmlable
 
     public function __construct(
         public ?string $name = null
-    )
-    {
+    ) {
     }
 
     public static function make(string $name): self
@@ -38,7 +38,7 @@ class LinkItems implements Htmlable
 
     public function route(string $route): static
     {
-        if (!Route::has($route)) {
+        if ( ! Route::has($route)) {
             throw new InvalidArgumentException('The provided route does not exist.');
         }
         $this->route = $route;
@@ -77,9 +77,7 @@ class LinkItems implements Htmlable
 
     public function getChildren(): array
     {
-        return array_map(function ($child) {
-            return $child;
-        }, $this->children);
+        return array_map(fn ($child) => $child, $this->children);
     }
 
     /**
@@ -93,21 +91,6 @@ class LinkItems implements Htmlable
     public function render(): View
     {
         return view('components.sidebar.link-items', $this->extractPublicMethods());
-    }
-
-    private function extractPublicMethods(): array
-    {
-        $methods = new ReflectionClass($this);
-        $publicMethods = [];
-
-        foreach ($methods->getMethods(ReflectionMethod::IS_PUBLIC) as $method) {
-            $methodName = $method->getName();
-            if (method_exists($this, $methodName)) {
-                $publicMethods[$methodName] = $this->$methodName(...);
-            }
-        }
-
-        return $publicMethods;
     }
 
     public function getName(): ?string

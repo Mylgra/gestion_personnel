@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\View\TallFlex\Forms\Inputs;
 
 use App\View\TallFlex\Contracts\HasEvaluated;
@@ -11,6 +13,8 @@ use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\View\View;
 use Override;
 use Throwable;
+
+use function view;
 
 class DateRange extends GenericForms implements Htmlable
 {
@@ -24,8 +28,7 @@ class DateRange extends GenericForms implements Htmlable
 
     public function __construct(
         protected string $name
-    )
-    {
+    ) {
     }
 
     public static function make(string $name): static
@@ -74,6 +77,6 @@ class DateRange extends GenericForms implements Htmlable
 
     public function render(): View
     {
-        return \view('components.forms.date-range', $this->extractPublicMethods());
+        return view('components.forms.date-range', $this->extractPublicMethods());
     }
 }

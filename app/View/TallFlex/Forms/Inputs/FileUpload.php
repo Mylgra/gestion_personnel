@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\View\TallFlex\Forms\Inputs;
 
 use App\View\TallFlex\Contracts\HasEvaluated;
@@ -43,8 +45,7 @@ class FileUpload extends GenericForms implements Htmlable
 
     public function __construct(
         public string $name,
-    )
-    {
+    ) {
     }
 
     public static function make(string $name): static

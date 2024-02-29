@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\View\TallFlex\Component;
 
 use App\View\TallFlex\Contracts\HasEvaluated;
@@ -15,9 +17,8 @@ use Throwable;
 
 class Tab extends Component implements Htmlable
 {
-
-    use HasExtractPublicMethods;
     use HasEvaluated;
+    use HasExtractPublicMethods;
 
     protected Closure|array|null $schema = [];
     private string|Closure|null $icon = null;
@@ -26,8 +27,7 @@ class Tab extends Component implements Htmlable
 
     public function __construct(
         protected string $name
-    )
-    {
+    ) {
     }
 
     public static function make(string $name)
@@ -60,7 +60,7 @@ class Tab extends Component implements Htmlable
                 return $schema;
             }
 
-            throw new InvalidArgumentException("Invalid must be instance of $parentClass.");
+            throw new InvalidArgumentException("Invalid must be instance of {$parentClass}.");
         }, $schema);
 
         return $this;
@@ -109,6 +109,6 @@ class Tab extends Component implements Htmlable
 
     public function getSchema(): array
     {
-        return array_map(fn($item) => $item, $this->schema);
+        return array_map(fn ($item) => $item, $this->schema);
     }
 }

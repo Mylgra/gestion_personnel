@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\View\TallFlex\Tables;
 
 use App\View\TallFlex\Exceptions\ModelDoesntExist;
@@ -31,8 +33,7 @@ class Datatable extends Component implements Htmlable
 
     public function __construct(
         public ?string $name = null
-    )
-    {
+    ) {
     }
 
     public static function make(string $name): static
@@ -70,11 +71,11 @@ class Datatable extends Component implements Htmlable
 
     public function model(string $modelClass, int $perPage = 10): static
     {
-        if (!is_subclass_of($modelClass, Model::class)) {
+        if ( ! is_subclass_of($modelClass, Model::class)) {
             throw new ModelDoesntExist("The class {$modelClass} is not a valid Eloquent model.");
         }
 
-        $modelInstance = new $modelClass;
+        $modelInstance = new $modelClass();
         $this->model = [
             'columns' => Schema::getColumnListing($modelInstance->getTable()),
             'data' => $modelClass::query()
@@ -92,9 +93,9 @@ class Datatable extends Component implements Htmlable
 
     public function fields(array $fields): static
     {
-        if ($this->model !== []) {
+        if ([] !== $this->model) {
             foreach ($fields as $field) {
-                if (!in_array($field, $this->model['columns'])) {
+                if ( ! in_array($field, $this->model['columns'])) {
                     throw new Exception("The field {$field} does not exist in the model.");
                 }
             }
@@ -113,7 +114,7 @@ class Datatable extends Component implements Htmlable
     public function sort(string $name): static
     {
         if ($this->sortColumn === $name) {
-            $this->sortDirection = $this->sortDirection === 'asc' ? 'desc' : 'asc';
+            $this->sortDirection = 'asc' === $this->sortDirection ? 'desc' : 'asc';
         } else {
             $this->sortColumn = $name;
             $this->sortDirection = 'asc';
@@ -136,8 +137,8 @@ class Datatable extends Component implements Htmlable
 
     public function search(string $search): static
     {
-        if ($this->model !== []) {
-            $this->model['data'] = $this->model['data']->filter(fn($item) => Str::contains($item, $search));
+        if ([] !== $this->model) {
+            $this->model['data'] = $this->model['data']->filter(fn ($item) => Str::contains($item, $search));
         }
 
         return $this;

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\View\TallFlex\Forms\Inputs;
 
 use App\View\TallFlex\Contracts\HasDisabled;
@@ -18,12 +20,12 @@ use Throwable;
 
 class SelectInput extends GenericForms implements Htmlable
 {
+    use HasDisabled;
     use HasEvaluated;
     use HasLabel;
     use HasPlaceholder;
     use HasRequired;
     use HasRule;
-    use HasDisabled;
 
     public bool $native = true;
     protected array|Collection $options = [];
@@ -37,9 +39,8 @@ class SelectInput extends GenericForms implements Htmlable
 
     public function __construct(
         public string $name
-    )
-    {
-        $this->uniqueId = uniqid('select-' . $this->name, true);
+    ) {
+        $this->uniqueId = uniqid('select-'.$this->name, true);
     }
 
     public static function make(string $name): static

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\View\TallFlex\Menus;
 
 use App\View\TallFlex\Contracts\HasExtractPublicMethods;
@@ -30,8 +32,7 @@ class Header extends Component implements Htmlable
 
     public function __construct(
         public ?string $name = null
-    )
-    {
+    ) {
     }
 
     public static function make(?string $name): static
@@ -76,7 +77,7 @@ class Header extends Component implements Htmlable
 
     public function route(string $route): static
     {
-        if (!Route::has($route)) {
+        if ( ! Route::has($route)) {
             throw new InvalidArgumentException('The provided route does not exist.');
         }
         $this->route = $route;
@@ -108,9 +109,7 @@ class Header extends Component implements Htmlable
 
     public function getItems(): array
     {
-        return array_map(function ($item) {
-            return $item;
-        }, $this->items);
+        return array_map(fn ($item) => $item, $this->items);
     }
 
     public function theme(string $theme): static

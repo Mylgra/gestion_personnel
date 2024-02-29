@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\View\TallFlex\Contracts;
 
 trait HasRule
@@ -12,7 +14,7 @@ trait HasRule
 
         return $this;
     }
-    
+
     public function getRules(): array
     {
         return $this->rules;

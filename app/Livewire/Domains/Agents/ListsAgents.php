@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Livewire\Domains\Agents;
 
 use App\Models\Agent;
@@ -20,7 +22,7 @@ class ListsAgents extends Component
         return view('livewire.domains.agents.lists-agents');
     }
 
-    public function delete(string $item)
+    public function delete(string $item): void
     {
         dd($item);
     }

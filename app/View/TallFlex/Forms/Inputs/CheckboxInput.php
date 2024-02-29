@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\View\TallFlex\Forms\Inputs;
 
 use App\View\TallFlex\Contracts\HasChecked;
@@ -13,10 +15,10 @@ use Throwable;
 
 class CheckboxInput extends GenericForms implements Htmlable
 {
+    use HasChecked;
     use HasEvaluated;
     use HasLabel;
     use HasRequired;
-    use HasChecked;
 
     protected string $uniqueId;
 
@@ -24,9 +26,8 @@ class CheckboxInput extends GenericForms implements Htmlable
 
     public function __construct(
         public string $name
-    )
-    {
-        $this->uniqueId = uniqid('checkbox-' . $this->name, true);
+    ) {
+        $this->uniqueId = uniqid('checkbox-'.$this->name, true);
     }
 
     public static function make(string $name): static

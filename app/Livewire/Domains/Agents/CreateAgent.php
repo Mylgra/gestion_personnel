@@ -1,11 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Livewire\Domains\Agents;
 
-use App\View\TallFlex\Forms\Editor\MarkdownEditor;
 use App\View\TallFlex\Forms\Forms;
+use App\View\TallFlex\Forms\Inputs\TextInput;
 use Illuminate\View\View;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Rule;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -14,15 +17,15 @@ class CreateAgent extends Component
 {
     use WithFileUploads;
 
-    public string $profile = '';
-    public string $status = '';
+    #[Rule('required')]
+    public string $username = '';
 
     public function render(): View
     {
         return view('livewire.domains.agents.create-agent');
     }
 
-    public function storeData()
+    public function storeData(): void
     {
         dd($this->all());
     }
@@ -31,10 +34,10 @@ class CreateAgent extends Component
     {
         return Forms::make()
             ->schema([
-                MarkdownEditor::make('profile')
-                    ->label('Description')
-                    ->height(200)
-                    ->placeholder('Enter the description'),
+                TextInput::make('username')
+                    ->label('Username')
+                    ->placeholder('Enter your username')
+                    ->required()
             ]);
     }
 }

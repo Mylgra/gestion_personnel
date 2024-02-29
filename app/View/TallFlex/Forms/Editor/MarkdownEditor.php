@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\View\TallFlex\Forms\Editor;
 
 use App\View\TallFlex\Contracts\HasEvaluated;
@@ -24,9 +26,8 @@ class MarkdownEditor extends GenericForms implements Htmlable
 
     public function __construct(
         protected string $name
-    )
-    {
-        $this->uniqueId = uniqid('markdown-' . $this->name, true);
+    ) {
+        $this->uniqueId = uniqid('markdown-'.$this->name, true);
     }
 
     public static function make(string $name)
