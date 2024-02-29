@@ -5,8 +5,8 @@ namespace App\View\TallFlex\Forms\Editor;
 use App\View\TallFlex\Contracts\HasEvaluated;
 use App\View\TallFlex\Contracts\HasLabel;
 use App\View\TallFlex\Contracts\HasPlaceholder;
-use App\View\TallFlex\Contracts\HasRequired;
 use App\View\TallFlex\Forms\GenericForms;
+use Closure;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\View\View;
 use Override;
@@ -16,10 +16,11 @@ class MarkdownEditor extends GenericForms implements Htmlable
 {
     use HasEvaluated;
     use HasLabel;
-    use HasRequired;
     use HasPlaceholder;
 
     protected string $uniqueId = '';
+
+    protected Closure|int|null $height = null;
 
     public function __construct(
         protected string $name
@@ -31,6 +32,18 @@ class MarkdownEditor extends GenericForms implements Htmlable
     public static function make(string $name)
     {
         return app(static::class, ['name' => $name]);
+    }
+
+    public function height(int|Closure|null $height = 300): static
+    {
+        $this->height = $height;
+
+        return $this;
+    }
+
+    public function getHeight(): ?int
+    {
+        return $this->evaluate($this->height);
     }
 
     public function getName(): string

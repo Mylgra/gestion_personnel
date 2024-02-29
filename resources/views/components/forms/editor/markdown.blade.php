@@ -1,17 +1,17 @@
 @php
     $name = $getName();
     $label = $getLabel();
-    $required = $getRequired();
     $uniqueId = $getUniqueId();
     $placeholder = $getPlaceholder();
+    $height = $getHeight();
 @endphp
 <div
     class="form-group"
     x-data="{
         initEasy() {
-            this.editor = new EasyMDE({
+            const simpleMDE = new SimpleMDE({
                 element: this.$refs.editor,
-                minHeight: '500px',
+                minHeight: '{{$height}}px',
                 placeholder: '{{ $placeholder }}',
                 autosave: {
                     enabled: true,
@@ -28,21 +28,14 @@
                             minute: '2-digit',
                         },
                     },
+                    forceSync: true,
                     text: 'Autosaved: ',
-                    previewRender: function(plainText) {
-                        console.log(plainText)
-                        return customMarkdownParser(plainText);
-                    },
-                    previewRender: function(plainText, preview) {
-                        console.log(plainText,preview)
-                        setTimeout(function(){
-                            preview.innerHTML = customMarkdownParser(plainText);
-                        }, 250);
-                        return 'Loading...';
-                    },
+                    hideIcons: ['guide', 'heading'],
                 },
             });
-            @this.set('{{ $name }}', easyMDE.value());
+            simpleMDE.codemirror.on('inputRead', function(){
+                @this.set('{{$name}}', simpleMDE.value());
+            });
         }
     }"
     x-init="initEasy"
@@ -62,9 +55,10 @@
 </div>
 
 @push('styles')
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
 @endpush
 
 @push('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
 @endpush
