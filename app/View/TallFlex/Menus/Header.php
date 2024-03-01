@@ -32,7 +32,8 @@ class Header extends Component implements Htmlable
 
     public function __construct(
         public ?string $name = null
-    ) {
+    )
+    {
     }
 
     public static function make(?string $name): static
@@ -77,7 +78,7 @@ class Header extends Component implements Htmlable
 
     public function route(string $route): static
     {
-        if ( ! Route::has($route)) {
+        if (!Route::has($route)) {
             throw new InvalidArgumentException('The provided route does not exist.');
         }
         $this->route = $route;
@@ -98,7 +99,7 @@ class Header extends Component implements Htmlable
     public function items(array $items): static
     {
         $this->items = array_map(function ($item) {
-            if ($item instanceof GenericForms) {
+            if ($item instanceof GenericForms || $item instanceof \Illuminate\View\Component) {
                 return $item;
             }
             throw new InvalidArgumentException('Invalid must be instance of Link.');
@@ -109,7 +110,7 @@ class Header extends Component implements Htmlable
 
     public function getItems(): array
     {
-        return array_map(fn ($item) => $item, $this->items);
+        return array_map(fn($item) => $item, $this->items);
     }
 
     public function theme(string $theme): static

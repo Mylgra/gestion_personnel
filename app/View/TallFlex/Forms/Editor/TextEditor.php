@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\View\TallFlex\Forms\Inputs;
+namespace App\View\TallFlex\Forms\Editor;
 
 use App\View\TallFlex\Contracts\HasEvaluated;
 use App\View\TallFlex\Contracts\HasLabel;
@@ -25,7 +25,8 @@ class TextEditor extends GenericForms implements Htmlable
 
     public function __construct(
         public string $name
-    ) {
+    )
+    {
     }
 
     public static function make(string $name): static
