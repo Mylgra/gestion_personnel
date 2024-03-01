@@ -2,32 +2,20 @@
 
 declare(strict_types=1);
 
-use App\Http\Controllers\AgentController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ServiceController;
+use App\Livewire\Domains\Agents\CreateAgent;
+use App\Livewire\Domains\Agents\ListsAgents;
+use App\Livewire\Domains\Agents\ShowAgent;
+use App\Livewire\Home;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+Route::get('/', Home::class)->name('home');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/agents', ListsAgents::class)->name('agents');
+Route::get('agents/create', CreateAgent::class)->name('create-agent');
+Route::get('agents/{agent}', ShowAgent::class)->name('show-agent');
 
-Route::get('/agents', [AgentController::class, 'index'])->name('agent.index');
-Route::get('/agents/create', [AgentController::class, 'create'])->name('agent.create');
-Route::post('/agents/create', [AgentController::class, 'store'])->name('agent.store');
-Route::get('/services', [ServiceController::class, 'index'])->name('service.index');
-
-Route::get('/dashboard', fn() => view('dashboard'))->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', fn () => view('dashboard'))->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function (): void {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -35,4 +23,4 @@ Route::middleware('auth')->group(function (): void {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';
