@@ -2,10 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\View\TallFlex\Forms\Inputs;
+namespace App\View\TallFlex\Forms\Editor;
 
 use App\View\TallFlex\Contracts\HasDisabled;
-use App\View\TallFlex\Contracts\HasEvaluated;
 use App\View\TallFlex\Contracts\HasLabel;
 use App\View\TallFlex\Contracts\HasPlaceholder;
 use App\View\TallFlex\Contracts\HasReadOnly;
@@ -19,7 +18,6 @@ use Throwable;
 class Textarea extends GenericForms implements Htmlable
 {
     use HasDisabled;
-    use HasEvaluated;
     use HasLabel;
     use HasPlaceholder;
     use HasReadOnly;
@@ -33,18 +31,19 @@ class Textarea extends GenericForms implements Htmlable
     protected bool $autosize = false;
 
     public function __construct(
-        public string $name
-    ) {
+        protected string $name
+    )
+    {
     }
 
-    public static function make(string $name): static
+    public static function make(?string $name): static
     {
         return new static($name);
     }
 
-    public function getLength(): int|Closure|null
+    public function getLength(): ?int
     {
-        return $this->length;
+        return $this->evaluate($this->length);
     }
 
     public function length(int|Closure|null $length): Textarea
@@ -53,9 +52,9 @@ class Textarea extends GenericForms implements Htmlable
         return $this;
     }
 
-    public function isAutosize(): bool
+    public function isAutosize(): ?bool
     {
-        return $this->autosize;
+        return $this->evaluate($this->autosize);
     }
 
     public function autosize(bool $autosize = true): Textarea
@@ -65,9 +64,9 @@ class Textarea extends GenericForms implements Htmlable
         return $this;
     }
 
-    public function getCols(): int|Closure|null
+    public function getCols(): ?int
     {
-        return $this->cols;
+        return $this->evaluate($this->cols);
     }
 
     public function cols(int|Closure|null $cols): Textarea
@@ -83,12 +82,12 @@ class Textarea extends GenericForms implements Htmlable
         return $this;
     }
 
-    public function getRows(): int|Closure|null
+    public function getRows(): ?int
     {
         return $this->evaluate($this->rows);
     }
 
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->evaluate($this->name);
     }
@@ -103,6 +102,6 @@ class Textarea extends GenericForms implements Htmlable
 
     public function render(): View
     {
-        return view('components.forms.textarea', $this->extractPublicMethods());
+        return view('components.forms.editor.textarea', $this->extractPublicMethods());
     }
 }
