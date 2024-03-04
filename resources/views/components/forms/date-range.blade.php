@@ -3,6 +3,7 @@
     $name = $getName();
     $startRange = $getMinDate();
     $endRange = $getMaxDate();
+    $required = $getRequired();
 @endphp
 <div
     class="form-group"
@@ -17,7 +18,10 @@
                     'Last 7 Days': [moment().subtract(7, 'days'), moment()],
                     'Last 30 Days': [moment().subtract(30, 'days'), moment()],
                     'This Month': [moment().startOf('month'), moment().endOf('month')],
-                    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                    'Last Month': [
+                        moment().subtract(1, 'month').startOf('month'),
+                        moment().subtract(1, 'month').endOf('month')
+                    ]
                 }
             }, (start, end) => {
                 this.startDate = start.format('YYYY-MM-DD');
@@ -36,6 +40,7 @@
             wire:model="{{ $name }}"
             class="form-control @error($name) is-invalid @enderror"
             native="false"
+            @if($required) required @endif
             x-ref="dateRangePicker"
         />
     </div>

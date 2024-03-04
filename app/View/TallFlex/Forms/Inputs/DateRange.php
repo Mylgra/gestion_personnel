@@ -7,13 +7,13 @@ namespace App\View\TallFlex\Forms\Inputs;
 use App\View\TallFlex\Contracts\HasEvaluated;
 use App\View\TallFlex\Contracts\HasLabel;
 use App\View\TallFlex\Contracts\HasPlaceholder;
+use App\View\TallFlex\Contracts\HasRequired;
 use App\View\TallFlex\Forms\GenericForms;
 use Closure;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\View\View;
 use Override;
 use Throwable;
-
 use function view;
 
 class DateRange extends GenericForms implements Htmlable
@@ -21,6 +21,7 @@ class DateRange extends GenericForms implements Htmlable
     use HasEvaluated;
     use HasLabel;
     use HasPlaceholder;
+    use HasRequired;
 
     protected string|Closure|null $minDate = null;
 
@@ -28,10 +29,11 @@ class DateRange extends GenericForms implements Htmlable
 
     public function __construct(
         protected string $name
-    ) {
+    )
+    {
     }
 
-    public static function make(string $name): static
+    public static function make(?string $name): static
     {
         return new  static($name);
     }
