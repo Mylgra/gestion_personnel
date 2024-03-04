@@ -12,4 +12,6 @@ abstract class GenericForms extends Component
 {
     use HasExtractPublicMethods;
     use HasEvaluated;
+
+    abstract public static function make(?string $name): static;
 }
