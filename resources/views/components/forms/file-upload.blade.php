@@ -29,20 +29,20 @@
             pond.setOptions({
                 @if($multiple) allowMultiple: true, @endif
                 labelIdle: `Drag & Drop your picture or Browse`,
-                acceptedFileTypes: ['{{ $accepts }}'],
-                @if($required)required: true, @endif
-                @if($getDropped())allowDrop: true, @endif
-                @if($reorder)allowReorder: true,@endif
-                @if($fileSize)maxFileSize:'{{ $fileSize }}', @endif
-                allowRevert: {{ $getAllowRevert() ? 'true' : 'false' }},
-                allowImagePreview: {{ $getAllowImagePreview() ? 'true' : 'false' }},
-                allowImageCrop: {{ $getAllowImageCrop() ? 'true' : 'false' }},
-                allowProcess: {{ $getAllowProcess() ? 'true' : 'false' }},
-                fileSizeBase: '{{ $getFileSizeBase() }}',
-                allowRemove: {{ $getAllowRemove() ? 'true' : 'false' }},
-                maxParallelUploads: '{{ $getMaxParallelUploads() }}',
-                allowFileTypeValidation: {{ $isAllowFileTypeValidation() ? 'true': 'false' }},
-                allowFileSizeValidation: {{ $isAllowFileSizeValidation() ? 'true' : 'false' }},
+                acceptedFileTypes: ['@js($accepts)'],
+                @if($required) required: true, @endif
+                @if($getDropped()) allowDrop: true, @endif
+                @if($reorder) allowReorder: true,@endif
+                @if($fileSize) maxFileSize:'@js($fileSize)', @endif
+                @if($getAllowRevert()) allowRevert: true, @endif
+                @if($getAllowImagePreview()) allowImagePreview: true, @endif
+                @if($isAllowFileSizeValidation()) allowFileSizeValidation: true, @endif
+                @if($isAllowFileTypeValidation()) allowFileTypeValidation: true, @endif
+                @if($getMaxParallelUploads()) maxParallelUploads: @js($getMaxParallelUploads()), @endif
+                @if($getAllowRemove()) allowRemove: true, @endif
+                @if($getAllowImageCrop()) allowImageCrop: true, @endif
+                @if($getAllowProcess()) allowProcess: true, @endif
+                @if($getFileSizeBase()) fileSizeBase: @js($getFileSizeBase()), @endif
                 credits:{},
                 server: {
                     process: (fieldName, file, metadata, load, error, progress, abort, transfer, options) => {

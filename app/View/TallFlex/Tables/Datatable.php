@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\View\TallFlex\Tables;
 
+use App\View\TallFlex\Contracts\HasEvaluated;
+use App\View\TallFlex\Contracts\HasExtractPublicMethods;
 use App\View\TallFlex\Exceptions\ModelDoesntExist;
 use Exception;
 use Illuminate\Contracts\Support\Htmlable;
@@ -12,13 +14,13 @@ use Illuminate\Support\Str;
 use Illuminate\View\View;
 use Livewire\Component;
 use Livewire\WithPagination;
-use ReflectionClass;
-use ReflectionMethod;
 use Schema;
 use Throwable;
 
 class Datatable extends Component implements Htmlable
 {
+    use HasEvaluated;
+    use HasExtractPublicMethods;
     use WithPagination;
 
     protected array $model = [];
@@ -33,7 +35,8 @@ class Datatable extends Component implements Htmlable
 
     public function __construct(
         public ?string $name = null
-    ) {
+    )
+    {
     }
 
     public static function make(string $name): static
@@ -51,27 +54,12 @@ class Datatable extends Component implements Htmlable
 
     public function render(): View
     {
-        return view('components.datas.datatable', $this->extractPublicMethods());
-    }
-
-    private function extractPublicMethods(): array
-    {
-        $methods = new ReflectionClass($this);
-        $publicMethods = [];
-
-        foreach ($methods->getMethods(ReflectionMethod::IS_PUBLIC) as $method) {
-            $methodName = $method->getName();
-            if (method_exists($this, $methodName)) {
-                $publicMethods[$methodName] = $this->$methodName(...);
-            }
-        }
-
-        return $publicMethods;
+        return view('components.datatable.table', $this->extractPublicMethods());
     }
 
     public function model(string $modelClass, int $perPage = 10): static
     {
-        if ( ! is_subclass_of($modelClass, Model::class)) {
+        if (!is_subclass_of($modelClass, Model::class)) {
             throw new ModelDoesntExist("The class {$modelClass} is not a valid Eloquent model.");
         }
 
@@ -95,7 +83,7 @@ class Datatable extends Component implements Htmlable
     {
         if ([] !== $this->model) {
             foreach ($fields as $field) {
-                if ( ! in_array($field, $this->model['columns'])) {
+                if (!in_array($field, $this->model['columns'])) {
                     throw new Exception("The field {$field} does not exist in the model.");
                 }
             }
@@ -138,7 +126,7 @@ class Datatable extends Component implements Htmlable
     public function search(string $search): static
     {
         if ([] !== $this->model) {
-            $this->model['data'] = $this->model['data']->filter(fn ($item) => Str::contains($item, $search));
+            $this->model['data'] = $this->model['data']->filter(fn($item) => Str::contains($item, $search));
         }
 
         return $this;

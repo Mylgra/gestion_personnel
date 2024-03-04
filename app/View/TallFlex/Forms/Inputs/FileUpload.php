@@ -45,10 +45,11 @@ class FileUpload extends GenericForms implements Htmlable
 
     public function __construct(
         public string $name,
-    ) {
+    )
+    {
     }
 
-    public static function make(string $name): static
+    public static function make(?string $name): static
     {
         return new static($name);
     }
@@ -235,5 +236,15 @@ class FileUpload extends GenericForms implements Htmlable
     public function getMaxParallelUploads(): int
     {
         return (int)$this->evaluate($this->maxParallelUploads);
+    }
+
+    public function upload(string $file)
+    {
+
+    }
+
+    public function removeUpload(string $removeUpload)
+    {
+        
     }
 }
