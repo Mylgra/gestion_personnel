@@ -7,7 +7,7 @@
     $uniqueId = $getUniqueId();
 @endphp
 
-<div class="custom-control custom-checkbox ">
+<div class="custom-control custom-checkbox">
     <input
         type="checkbox"
         class="custom-control-input"

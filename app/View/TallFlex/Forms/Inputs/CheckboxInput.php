@@ -25,14 +25,15 @@ class CheckboxInput extends GenericForms implements Htmlable
     protected string|null $tooltip = null;
 
     public function __construct(
-        public string $name
-    ) {
-        $this->uniqueId = uniqid('checkbox-'.$this->name, true);
+        protected ?string $name
+    )
+    {
+        $this->uniqueId = uniqid('checkbox-' . $this->name, true);
     }
 
-    public static function make(string $name): static
+    public static function make(?string $name): static
     {
-        return new static($name);
+        return app(static::class, ['name' => $name]);
     }
 
     public function getName(): string

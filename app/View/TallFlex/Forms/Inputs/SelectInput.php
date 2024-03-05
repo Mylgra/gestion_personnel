@@ -39,11 +39,12 @@ class SelectInput extends GenericForms implements Htmlable
 
     public function __construct(
         public string $name
-    ) {
-        $this->uniqueId = uniqid('select-'.$this->name, true);
+    )
+    {
+        $this->uniqueId = uniqid('select-' . $this->name, true);
     }
 
-    public static function make(string $name): static
+    public static function make(?string $name): static
     {
         return new static($name);
     }

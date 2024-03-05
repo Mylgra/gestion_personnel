@@ -28,7 +28,7 @@
               @endif
               @if($mode)mode: '{{ $mode }}', @endif
                 onChange: function(selectedDates, dateStr, instance) {
-                    @this.set('{{ $name }}', dateStr);
+                    @this.set('{{ $name }}', dateStr, false);
                 }
            })
        }

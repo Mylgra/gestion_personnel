@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\View\TallFlex\Forms\Editor;
 
-use App\View\TallFlex\Contracts\HasEvaluated;
 use App\View\TallFlex\Contracts\HasLabel;
 use App\View\TallFlex\Contracts\HasPlaceholder;
 use App\View\TallFlex\Forms\GenericForms;
@@ -15,7 +14,6 @@ use Throwable;
 
 class TextEditor extends GenericForms implements Htmlable
 {
-    use HasEvaluated;
     use HasLabel;
     use HasPlaceholder;
 
@@ -49,7 +47,7 @@ class TextEditor extends GenericForms implements Htmlable
 
     public function render(): View
     {
-        return view('components.forms.text-editor', $this->extractPublicMethods());
+        return view('components.forms.editor.text-editor', $this->extractPublicMethods());
     }
 
     public function options(array $options): static

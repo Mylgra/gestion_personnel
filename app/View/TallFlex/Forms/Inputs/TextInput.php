@@ -46,11 +46,12 @@ class TextInput extends GenericForms implements Htmlable
 
     public function __construct(
         protected string $name,
-    ) {
-        $this->uniqueId = uniqid('input-'.$this->name, true);
+    )
+    {
+        $this->uniqueId = uniqid('input-' . $this->name, true);
     }
 
-    public static function make(string $name): static
+    public static function make(?string $name): static
     {
         return app(static::class, ['name' => $name]);
     }

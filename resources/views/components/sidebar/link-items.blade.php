@@ -6,7 +6,7 @@
 @endphp
 <li class="nk-menu-item {{ $children ? 'has-sub' : '' }}">
     <a
-        href="{{ $route }}"
+        href="{{ $route ?? "#" }}"
         @if(! $children)
             wire:navigate
         @endif

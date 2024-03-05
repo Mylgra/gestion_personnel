@@ -48,7 +48,7 @@
                     </div>
                 </div>
             </div>
-
+            {{ $this->components() }}
         </div>
     </div>
 </div>

@@ -25,15 +25,20 @@
                 },
                 placeholder: '{{ $placeholder }}',
             });
-            this.quill.on('editor-change', function() {
-                @this.set('{{ $name }}', quill.root.innerHTML);
+            this.quill.on('editor-change', function(data) {
+                this.$refs.editor.value = data;
+                this.$refs.editor.dispatchEvent(new Event('input'))
+                @this.set('{{ $name }}', quill.root.innerHTML, false);
             });
         },
     }"
     x-init="initQuill"
 >
     <div class="card-inner">
-        <div x-ref="editor" wire:model="{{ $name }}"></div>
+        <div
+            x-ref="editor"
+            wire:model="{{ $name }}"
+        ></div>
     </div>
 </div>
 

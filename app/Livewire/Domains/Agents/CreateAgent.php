@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Livewire\Domains\Agents;
 
 use App\View\TallFlex\Forms\Forms;
-use App\View\TallFlex\Forms\Inputs\TextInput;
+use App\View\TallFlex\Forms\Inputs\SelectInput;
 use Illuminate\View\View;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Rule;
@@ -34,10 +34,10 @@ class CreateAgent extends Component
     {
         return Forms::make()
             ->schema([
-                TextInput::make('username')
-                    ->label('Username')
-                    ->placeholder('Enter your username')
+                SelectInput::make('person')
+                    ->label('Choisir une personne')
                     ->required()
+                    ->searchable()
             ]);
     }
 }

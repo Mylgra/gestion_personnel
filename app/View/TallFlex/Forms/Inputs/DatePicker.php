@@ -37,10 +37,11 @@ class DatePicker extends GenericForms implements Htmlable
 
     public function __construct(
         protected string $name,
-    ) {
+    )
+    {
     }
 
-    public static function make(string $name): self
+    public static function make(?string $name): static
     {
         return new self($name);
     }

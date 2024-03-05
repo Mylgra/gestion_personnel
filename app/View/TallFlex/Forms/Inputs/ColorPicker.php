@@ -24,13 +24,19 @@ class ColorPicker extends GenericForms implements Htmlable
     protected int|Closure|null $width = null;
 
     public function __construct(
-        public string $name,
-    ) {
+        protected string $name,
+    )
+    {
     }
 
-    public static function make(string $name): static
+    public static function make(?string $name): static
     {
         return app(static::class, ['name' => $name]);
+    }
+
+    public function getName(): string
+    {
+        return $this->evaluate($this->name);
     }
 
     public function getWidth(): ?int
@@ -41,12 +47,8 @@ class ColorPicker extends GenericForms implements Htmlable
     public function width(int|Closure|null $width): ColorPicker
     {
         $this->width = $width;
-        return $this;
-    }
 
-    public function getName(): ?string
-    {
-        return $this->evaluate($this->name);
+        return $this;
     }
 
     public function getType(): ?string
@@ -57,6 +59,7 @@ class ColorPicker extends GenericForms implements Htmlable
     public function type(string|Closure|null $type): ColorPicker
     {
         $this->type = $type;
+
         return $this;
     }
 
