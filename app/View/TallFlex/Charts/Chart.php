@@ -22,9 +22,9 @@ class Chart extends Component implements Htmlable
 
     protected string|Closure|null $type = null;
 
-    protected string|Closure|null $backgroundColor = null;
+    protected array|string|Closure|null $backgroundColor = null;
 
-    protected Closure|string|null $borderColor = null;
+    protected array|Closure|string|null $borderColor = null;
 
     public function __construct(
         protected string $name
@@ -73,7 +73,7 @@ class Chart extends Component implements Htmlable
         return $this;
     }
 
-    public function backgroundColor(string|Closure|null $backgroundColor): static
+    public function backgroundColor(array|string|Closure|null $backgroundColor): static
     {
         $this->backgroundColor = $backgroundColor;
 
@@ -85,7 +85,7 @@ class Chart extends Component implements Htmlable
         return $this->evaluate($this->backgroundColor);
     }
 
-    public function borderColor(string|Closure|null $borderColor): static
+    public function borderColor(array|string|Closure|null $borderColor): static
     {
         $this->borderColor = $borderColor;
 

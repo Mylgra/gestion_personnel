@@ -19,8 +19,8 @@
                     label: '{{ $labels }}',
                     data: @js($datasets),
                     borderWidth: 1,
-                    backgroundColor: '{{ $backgroundColor }}',
-                    borderColor: '{{ $borderColor }}',
+                    backgroundColor: @js($backgroundColor),
+                    borderColor: @js($borderColor),
                   }]
                 },
                 options: {
