@@ -1,8 +1,11 @@
 @php
     $events = $getEvents();
     $type = $getType();
+    $editable = $getEditable();
+    $selectable = $getSelectable();
+    $height = $getHeight();
 @endphp
-@dump($events)
+
 <div
     class="card"
     data-calendar="true"
@@ -11,12 +14,21 @@
         init() {
             this.calendar = new FullCalendar.Calendar(this.$refs.calendar, {
                 initialView: '{{ $type }}',
+                @if($selectable) editable: true, @endif
+                @if($editable) selectable: true, @endif
+                height: {{ $height ?? 650 }},
+                events: {!! str_replace('"', "'", json_encode($events)) !!},
                 headerToolbar: {
                     left: 'prev,next today',
                     center: 'title',
-                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
                 },
-                events: @json($events)
+                select: function(data) {
+                    console.log(data)
+                },
+                eventDrop: function(data) {
+                    @this.updateEvent(data.event.id, data.event.startStr, data.event.endStr);
+                },
             });
             this.calendar.render();
         }

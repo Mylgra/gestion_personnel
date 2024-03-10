@@ -19,8 +19,14 @@ class FullCalendar extends GenericForms implements Htmlable
     use HasExtractPublicMethods;
 
     protected Closure|string|null $type = null;
-    
+
     protected Arrayable|Closure|array|Collection $events = [];
+
+
+    protected Closure|bool $editable = false;
+    protected Closure|bool $selectable = false;
+    
+    protected Closure|int|null $height = null;
 
     public function __construct(
         protected string $name
@@ -37,6 +43,43 @@ class FullCalendar extends GenericForms implements Htmlable
     {
         return $this->evaluate($this->name);
     }
+
+    public function editable(bool|Closure $editable = true): static
+    {
+        $this->editable = $editable;
+
+        return $this;
+    }
+
+    public function height(int|Closure|null $height = 650): static
+    {
+        $this->height = $height;
+
+        return $this;
+    }
+
+    public function getHeight(): ?int
+    {
+        return $this->evaluate($this->height);
+    }
+
+    public function getEditable(): ?bool
+    {
+        return $this->evaluate($this->editable);
+    }
+
+    public function selectable(bool|Closure $selectable = true): static
+    {
+        $this->selectable = $selectable;
+
+        return $this;
+    }
+
+    public function getSelectable(): ?bool
+    {
+        return $this->evaluate($this->selectable);
+    }
+
 
     public function type(string|Closure|null $type = 'dayGridMonth'): static
     {
