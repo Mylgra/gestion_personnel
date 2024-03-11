@@ -13,10 +13,20 @@
         calendar: null,
         init() {
             this.calendar = new FullCalendar.Calendar(this.$refs.calendar, {
+                timeZone: 'UTC',
                 initialView: '{{ $type }}',
                 @if($selectable) editable: true, @endif
                 @if($editable) selectable: true, @endif
                 height: {{ $height ?? 650 }},
+                themeSystem: 'bootstrap5',
+                contentHeight: 780,
+                aspectRatio: 3,
+                views: {
+                   dayGridMonth: {
+                     dayMaxEventRows: 2
+                   }
+                },
+                nowIndicator: true,
                 events: {!! str_replace('"', "'", json_encode($events)) !!},
                 headerToolbar: {
                     left: 'prev,next today',

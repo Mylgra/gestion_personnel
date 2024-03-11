@@ -25,11 +25,11 @@ class FullCalendar extends GenericForms implements Htmlable
 
     protected Closure|bool $editable = false;
     protected Closure|bool $selectable = false;
-    
+
     protected Closure|int|null $height = null;
 
     public function __construct(
-        protected string $name
+        protected ?string $name
     )
     {
     }
