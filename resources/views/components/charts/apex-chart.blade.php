@@ -2,11 +2,12 @@
     $name = $getName();
     $height = $getHeight();
     $type = $getType();
-    $dataLabel = $getDateLabel();
-    $data = $getData();
+    $dataLabel = $getDataLabel();
+    $datasets = $getDataset();
 @endphp
 
 <div
+    wire:ignore
     class="card card-full"
     x-data="{
         chart: null,
@@ -45,7 +46,7 @@
                 series: [
                     {
                         name: '{{ $name }}',
-                        data: @js($data),
+                        data: @js($datasets),
                     },
                 ],
                 xaxis: {
@@ -70,7 +71,9 @@
                 </div>
             </div>
             <div class="nk-ecwg8-ck" style="margin-bottom: 3rem">
-                <div id="chart" x-ref="chart"></div>
+                <div
+                    x-ref="chart"
+                ></div>
             </div>
         </div>
     </div>
