@@ -3,12 +3,12 @@
 namespace App\Livewire\GestionService\Service;
 
 use App\Contract\Enums\LevelEnum;
-use App\View\TallFlex\Forms\Forms;
-use App\View\TallFlex\Forms\Inputs\SelectInput;
-use App\View\TallFlex\Forms\Inputs\TextInput;
 use Illuminate\View\View;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
+use Tresorkasenda\Forms\Forms;
+use Tresorkasenda\Forms\Inputs\SelectInput;
+use Tresorkasenda\Forms\Inputs\TextInput;
 
 #[Layout('layouts.guest')]
 class CreateService extends Component

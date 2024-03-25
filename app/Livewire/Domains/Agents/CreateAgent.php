@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App\Livewire\Domains\Agents;
 
-use App\View\TallFlex\Forms\Forms;
-use App\View\TallFlex\Forms\Inputs\SelectInput;
 use Illuminate\View\View;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Tresorkasenda\Forms\Forms;
+use Tresorkasenda\Forms\Inputs\SelectInput;
 
 #[Layout('layouts.guest')]
 class CreateAgent extends Component
