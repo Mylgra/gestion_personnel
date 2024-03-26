@@ -5611,7 +5611,7 @@
             "dist": {
                 "type": "path",
                 "url": "./packages/ballstack",
-                "reference": "fa46a0fc4c846aada2ec6ef5b1f77e19ca7f3b15"
+                "reference": "7f6072060073afe07e6132a495148a2da03a09f8"
             },
             "require": {
                 "illuminate/support": "^10.47",
@@ -5667,7 +5667,6 @@
                 "laravel",
                 "livewire",
                 "livewire-components",
-                "livewire-packages",
                 "ui"
             ],
             "transport-options": {
