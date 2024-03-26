@@ -13,6 +13,7 @@
         "laravel/breeze": "^1.29",
         "laravel/framework": "^v10.48.4",
         "laravel/sanctum": "^3.3",
+        "laravel/socialite": "^5.12",
         "laravel/tinker": "^v2.9.0",
         "livewire/livewire": "^3.4",
         "tresorkasenda/ballstack": "dev-master"
