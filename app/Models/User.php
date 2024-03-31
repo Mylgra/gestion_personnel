@@ -46,4 +46,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function getSubstringAttribute(): string
+    {
+        return mb_strtoupper(mb_substr($this->name, 0, 2));
+    }
 }

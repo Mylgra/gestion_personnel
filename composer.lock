@@ -5757,7 +5757,7 @@
             "dist": {
                 "type": "path",
                 "url": "./packages/ballstack",
-                "reference": "a949bb9c4eb6f9eff0db81e81a0065d49b57eeaa"
+                "reference": "318cbbbcd7712ec37ca490a45c449a618ac5ae8d"
             },
             "require": {
                 "illuminate/console": "^10.48.4| 11.0",
