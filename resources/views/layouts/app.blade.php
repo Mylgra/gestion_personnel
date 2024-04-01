@@ -18,7 +18,7 @@
     <script src="{{ asset('assets/js/scripts.js') }}"></script>
     @stack('styles')
 </head>
-<body class="nk-body bg-lighter npc-default has-sidebar ui-bordered">
+<body class="nk-body bg-lighter npc-default has-sidebar ff-base ui-bordered">
 <div class="nk-app-root">
     <div class="nk-main ">
         {{ $sidebar }}

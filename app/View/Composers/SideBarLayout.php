@@ -12,16 +12,16 @@ class SideBarLayout
 {
     public function compose(View $view): void
     {
-        $sidebar = Sidebar::make()
-            ->image('images/profile.jpg')
-            ->theme('dark')
-            ->route('home')
+        $sidebar = Sidebar::make('Administration')
+            ->image(image: asset('images/logo.jpg'))
+            ->theme('light')
+            ->route('dashboard')
             ->icon('menu')
             ->items([
                 // Link items
                 LinkItems::make('Dashboard')
                     ->route('dashboard')
-                    ->icon('home')
+                    ->icon('dashboard')
             ]);
 
         $view->with('sidebar', $sidebar);

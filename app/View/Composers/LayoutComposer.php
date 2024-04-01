@@ -12,9 +12,9 @@ class LayoutComposer
     public function compose(View $view): void
     {
         $header = Header::make()
-            ->image(asset('assets/images/logo.jpg'))
+            ->image(image: asset('images/logo.jpg'))
             ->theme('light')
-            ->route('home')
+            ->route('dashboard')
             ->items([
                 // your LinkLayout
             ]);

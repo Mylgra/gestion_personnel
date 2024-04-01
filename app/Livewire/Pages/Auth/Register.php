@@ -16,13 +16,13 @@ use Livewire\Attributes\Validate;
 use Livewire\Component;
 
 #[Layout('layouts.guest')]
-#[Title('Register')]
-class RegisterComponent extends Component
+#[Title('Registration')]
+class Register extends Component
 {
     #[Validate(['required', 'string', 'max:255'])]
     public string $name = '';
 
-    #[Validate(['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class])]
+    #[Validate(['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class])]
     public string $email = '';
 
     #[Validate(['required', 'string', 'confirmed'])]
@@ -33,7 +33,7 @@ class RegisterComponent extends Component
 
     public function render(): View
     {
-        return view('livewire.pages.auth.register-component');
+        return view('livewire.pages.auth.register');
     }
 
     public function register(): void

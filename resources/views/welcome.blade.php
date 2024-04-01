@@ -1,3 +1,3 @@
-<x-app-layout title="">
+<x-guest-layout title="">
 
-</x-app-layout>
+</x-guest-layout>
