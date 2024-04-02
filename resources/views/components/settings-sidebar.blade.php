@@ -7,9 +7,19 @@
                 <div class="user-avatar bg-primary">
                     <span>{{ strtoupper(substr(auth()->user()->name,0, 2)) }}</span>
                 </div>
-                <div class="user-info">
-                    <span class="lead-text">{{ auth()->user()->name }}</span>
-                    <span class="sub-text">{{ auth()->user()->email }}</span>
+                <div
+                    class="user-info"
+                    x-data="{{ json_encode(['name' => auth()->user()->name, 'email' => auth()->user()->email]) }}"
+                >
+                    <span
+                        class="lead-text"
+                        x-text="name"
+                        x-on:profile-updated.window="name = $event.detail.name"></span>
+                    <span
+                        class="sub-text"
+                        x-text="email"
+                        x-on:profile-updated.window="email = $event.detail.email"
+                    ></span>
                 </div>
                 <div class="user-action">
                     <div class="dropdown">
@@ -25,9 +35,9 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#">
+                                    <a href="{{ route('update-profile') }}" wire:navigate>
                                         <em class="icon ni ni-edit-fill"></em>
-                                        <span>Update Profile</span>
+                                        <span>{{ __('Update Profile') }}</span>
                                     </a>
                                 </li>
                             </ul>
