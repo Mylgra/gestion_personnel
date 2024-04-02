@@ -8,6 +8,7 @@ use App\Livewire\Pages\Auth\PasswordReset;
 use App\Livewire\Pages\Auth\Register;
 use App\Livewire\Pages\Auth\ResetPassword;
 use App\Livewire\Pages\Auth\VerifyEmail;
+use App\Livewire\Pages\Profile\UpdateProfile;
 use App\Livewire\Pages\Profile\UserProfile;
 use App\Livewire\Pages\Setting\AccountSetting;
 use Illuminate\Support\Facades\Route;
@@ -24,7 +25,7 @@ Route::middleware('guest')->group(function (): void {
         ->name('password.reset');
 });
 
-Route::middleware('auth')->group(function (): void {
+Route::middleware(['auth', 'verified'])->group(function (): void {
 
     Route::get('confirm-password', ConfirmPassword::class)
         ->name('password.confirm');
@@ -37,6 +38,7 @@ Route::middleware('auth')->group(function (): void {
         ->name('verification.verify');
 
     Route::get('profile', UserProfile::class)->name('profile');
+    Route::get('update-profile', UpdateProfile::class)->name('update-profile');
 
     Route::get('setting', AccountSetting::class)->name('setting');
 });

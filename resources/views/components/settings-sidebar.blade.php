@@ -48,16 +48,17 @@
         </div>
         <div class="card-inner">
             <div class="user-account-info py-0">
-                <h6 class="overline-title-alt">Account Balance</h6>
-                <div class="user-balance">
-                    12.395769
-                    <small class="currency currency-btc">USD</small>
+                <h6 class="overline-title-alt">{{ __('Profile User') }}</h6>
+                <div class="user-balance-sub">
+                    <span class="fw-medium fs-14px">Name : </span>
+                    <span>
+                        {{ auth()->user()->name ?? '' }}
+                    </span>
                 </div>
                 <div class="user-balance-sub">
-                    Pending
+                    <span class="fw-medium fs-14px">Email : </span>
                     <span>
-                        0.344939
-                        <span class="currency currency-btc">USD</span>
+                        {{ auth()->user()->email ?? '' }}
                     </span>
                 </div>
             </div>
