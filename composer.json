@@ -2,25 +2,31 @@
     "name": "laravel/laravel",
     "type": "project",
     "description": "The skeleton application for the Laravel framework.",
-    "keywords": ["laravel", "framework"],
+    "keywords": [
+        "laravel",
+        "framework"
+    ],
     "license": "MIT",
     "require": {
-        "php": "^8.1",
-        "guzzlehttp/guzzle": "^7.2",
-        "laravel/breeze": "^1.28",
-        "laravel/framework": "^10.10",
-        "laravel/pint": "^1.14",
+        "php": "^8.3",
+        "guzzlehttp/guzzle": "^7.8",
+        "laravel/breeze": "^1.29",
+        "laravel/framework": "^v10.48.4",
         "laravel/sanctum": "^3.3",
-        "laravel/tinker": "^2.8"
+        "laravel/socialite": "^5.12",
+        "laravel/tinker": "^v2.9.0",
+        "livewire/livewire": "^3.4",
+        "tresorkasenda/ballstack": "dev-master"
     },
     "require-dev": {
-        "fakerphp/faker": "^1.9.1",
-        "laravel/sail": "^1.18",
-        "mockery/mockery": "^1.4.4",
-        "nunomaduro/collision": "^7.0",
+        "fakerphp/faker": "^v1.23.1",
+        "laravel/pint": "^v1.13.11",
+        "laravel/sail": "^v1.28.1",
+        "mockery/mockery": "^1.6.7",
+        "nunomaduro/collision": "^v7.10.0",
         "pestphp/pest": "^2.0",
         "pestphp/pest-plugin-laravel": "^2.0",
-        "spatie/laravel-ignition": "^2.0"
+        "spatie/laravel-ignition": "^2.4.2"
     },
     "autoload": {
         "psr-4": {
@@ -54,6 +60,12 @@
             "dont-discover": []
         }
     },
+    "repositories": [
+        {
+            "url": "./packages/ballstack",
+            "type": "path"
+        }
+    ],
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",

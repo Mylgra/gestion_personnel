@@ -1,38 +1,37 @@
 <?php
 
-declare(strict_types=1);
-
-use App\Http\Controllers\AgentController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Livewire\Pages\Auth\ConfirmPassword;
+use App\Livewire\Pages\Auth\LoginComponent;
+use App\Livewire\Pages\Auth\PasswordResetComponent;
+use App\Livewire\Pages\Auth\RegisterComponent;
+use App\Livewire\Pages\Auth\ResetPasswordComponent;
+use App\Livewire\Pages\Auth\VerifyEmail;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+Route::get('/', fn() => view('welcome'))->name('home');
 
-Route::get('/', function () {
-    return view('welcome');
+Route::middleware('guest')->group(function (): void {
+    Route::get('/login', LoginComponent::class)->name('login');
+
+    Route::get('/register', RegisterComponent::class)->name('register');
+
+    Route::get('forgot-password', PasswordResetComponent::class)
+        ->name('password.request');
+
+    Route::get('reset-password/{token}', ResetPasswordComponent::class)
+        ->name('password.reset');
 });
-
-Route::get('/agents', [AgentController::class, 'index'])->name('agent.index');
-Route::get('/agents/create', [AgentController::class, 'create'])->name('agent.create');
-Route::post('/agents/create', [AgentController::class, 'store'])->name('agent.store');
-Route::get('/services', [ServiceController::class, 'index'])->name('service.index');
-
-Route::get('/dashboard', fn() => view('dashboard'))->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function (): void {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
 
-require __DIR__ . '/auth.php';
+    Route::get('confirm-password', ConfirmPassword::class)
+        ->name('password.confirm');
+
+    Route::get('verify-email', VerifyEmail::class)
+        ->name('verification.notice');
+
+    Route::get('verify-email/{id}/{hash}', VerifyEmailController::class)
+        ->middleware(['signed', 'throttle:6,1'])
+        ->name('verification.verify');
+});
