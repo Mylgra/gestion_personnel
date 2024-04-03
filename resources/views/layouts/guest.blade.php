@@ -8,6 +8,12 @@
 
     <title>{{ $title }} | {{ config('app.name') }}</title>
 
+    <style>
+        [x-cloak] {
+            display: none !important;
+        }
+    </style>
+
     @vite(['resources/css/app.css'])
 </head>
 <body class="nk-body bg-white npc-default ff-base pg-auth">

@@ -13,6 +13,13 @@
     <link rel="shortcut icon" href="">
     <title>{{ config('app.name') }} | {{ $title }}</title>
 
+    <style>
+        [x-cloak] {
+            display: none !important;
+        }
+    </style>
+
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script src="{{ asset('assets/js/bundle.js') }}"></script>
     <script src="{{ asset('assets/js/scripts.js') }}"></script>

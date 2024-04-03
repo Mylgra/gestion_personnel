@@ -9,8 +9,8 @@ use Illuminate\View\View;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
+use Tresorkasenda\Forms\Components\TextInput;
 use Tresorkasenda\Forms\Forms;
-use Tresorkasenda\Forms\Inputs\TextInput;
 
 #[Layout('layouts.app')]
 #[Title('Update Profile')]
@@ -31,7 +31,7 @@ class UpdateProfile extends Component
         return view('livewire.pages.profile.update-profile');
     }
 
-    public function storeData(): void
+    public function submit(): void
     {
         $user = Auth::user();
 
