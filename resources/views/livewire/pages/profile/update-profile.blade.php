@@ -4,7 +4,7 @@
             {{ __('Update Personnel Information') }}
         </x-slot:title>
         <div class="nk-block">
-            {{ $this->updateComponents() }}
+            {{ $this->form() }}
         </div>
     </x-setting-aside>
 </div>

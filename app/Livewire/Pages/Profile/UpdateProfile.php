@@ -64,7 +64,7 @@ class UpdateProfile extends Component
         $this->redirectRoute(name: 'profile', navigate: true);
     }
 
-    public function updateComponents(): Forms
+    public function form(): Forms
     {
         return Forms::make()
             ->hasCard()
