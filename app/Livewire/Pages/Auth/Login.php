@@ -21,7 +21,7 @@ use Livewire\Component;
 #[Title('Login')]
 class Login extends Component
 {
-    #[Validate('required|string|email|exists:users')]
+    #[Validate('required|email|exists:users')]
     public string $email = '';
 
     #[Validate('required|string')]
