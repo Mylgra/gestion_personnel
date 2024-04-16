@@ -38,7 +38,6 @@
         }
     </style>
 
-    @ballStackScripts
 </head>
 <body class="nk-body bg-lighter npc-default has-sidebar ff-base ui-bordered">
 <div class="nk-app-root">
