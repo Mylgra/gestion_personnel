@@ -25,6 +25,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'last_login_date',
+        'last_login_ip'
     ];
 
     /**
@@ -45,10 +47,6 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'last_login_date' => 'datetime'
     ];
-
-    public function getSubstringAttribute(): string
-    {
-        return mb_strtoupper(mb_substr($this->name, 0, 2));
-    }
 }
