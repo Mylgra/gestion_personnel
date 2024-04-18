@@ -8,15 +8,19 @@ use Illuminate\Foundation\Application;
 use Illuminate\View\View;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Tresorkasenda\Forms\Forms;
 
 #[Layout('layouts.app')]
-#[Title('CreateEventForm')]
+#[Title('Create Even tForm')]
 class CreateEventForm extends Component
 {
     use WithFileUploads;
+
+    #[Validate('required')]
+    public string $editor = '';
 
     public function mount(): void
     {
@@ -28,16 +32,16 @@ class CreateEventForm extends Component
         return Forms::make()
             ->hasCard()
             ->schema([
-                // Your fields
+
             ])
             ->action(__('Save'));
     }
 
-    public function create(): void
+    public function submit(): void
     {
         $data = $this->validate();
-
-        $record = Event::create($data);
+        dd($data);
+        $record = Event::query()->create($data);
 
         $this->redirectRoute(name: "/{{ route }}", navigate: true);
     }

@@ -83,7 +83,7 @@
                 <h6 class="overline-title-alt">Last Login</h6>
                 <p>06-29-2020 02:39pm</p>
                 <h6 class="overline-title-alt">Login IP</h6>
-                <p>{{ request()->ip() }}</p>
+                <p>192.129.243.28</p>
             </div>
         </div>
     </div>

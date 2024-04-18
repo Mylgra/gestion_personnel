@@ -14,8 +14,8 @@
     <title>{{ config('app.name') }} | {{ $title }}</title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <script src="{{ asset('assets/js/bundle.js') }}" data-navigate-track data-navigate-once></script>
-    <script src="{{ asset('assets/js/scripts.js') }}" data-navigate-track data-navigate-once></script>
+    <script src="{{ asset('assets/bundle.js') }}" data-navigate-track data-navigate-once></script>
+    <script src="{{ asset('assets/scripts.js') }}" data-navigate-track data-navigate-once></script>
     @stack('styles')
 
     <style>
